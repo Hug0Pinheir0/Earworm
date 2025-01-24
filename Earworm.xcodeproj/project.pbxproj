@@ -57,6 +57,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4774AC192D443FA000DE4DA3 /* PodcastDetails */ = {
+			isa = PBXGroup;
+			children = (
+				4774AC1D2D443FD700DE4DA3 /* Protocols */,
+				4774AC1C2D443FC600DE4DA3 /* View */,
+				4774AC1B2D443FBB00DE4DA3 /* Presenter */,
+				4774AC1A2D443FB000DE4DA3 /* Model */,
+			);
+			path = PodcastDetails;
+			sourceTree = "<group>";
+		};
+		4774AC1A2D443FB000DE4DA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4774AC1B2D443FBB00DE4DA3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4774AC1C2D443FC600DE4DA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4774AC1D2D443FD700DE4DA3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4774AC1E2D44401E00DE4DA3 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				4774AC222D44406900DE4DA3 /* Protocols */,
+				4774AC212D44405100DE4DA3 /* View */,
+				4774AC202D44404300DE4DA3 /* Presenter */,
+				4774AC1F2D44403300DE4DA3 /* Model */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		4774AC1F2D44403300DE4DA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4774AC202D44404300DE4DA3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4774AC212D44405100DE4DA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4774AC222D44406900DE4DA3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		478DD2FB2D43DC3000839239 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +178,8 @@
 		478DD3272D44027B00839239 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4774AC1E2D44401E00DE4DA3 /* Player */,
+				4774AC192D443FA000DE4DA3 /* PodcastDetails */,
 				478DD3282D44028600839239 /* RSSFeed */,
 			);
 			path = Modules;
