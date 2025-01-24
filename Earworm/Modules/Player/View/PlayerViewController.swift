@@ -113,3 +113,8 @@ class PlayerViewController: UIViewController {
         }
     }
 }
+
+#Preview {
+  let vc = PlayerViewController()
+    return vc
+}

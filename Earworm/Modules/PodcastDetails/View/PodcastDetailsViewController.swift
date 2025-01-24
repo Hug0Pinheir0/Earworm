@@ -93,3 +93,8 @@ class PodcastDetailsViewController: UIViewController {
         }
     }
 }
+
+#Preview {
+  let vc = PodcastDetailsViewController()
+    return vc
+}

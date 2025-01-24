@@ -75,4 +75,9 @@ class RSSFeedViewController: UIViewController {
     }
 }
 
+#Preview {
+  let vc = RSSFeedViewController()
+    return vc
+}
+
 
