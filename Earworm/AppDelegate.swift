@@ -13,7 +13,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let networkService = NetworkService()
+        networkService.fetchRSS(from: "https://feeds.megaphone.fm/la-cotorrisa") { result in
+            switch result {
+            case .success(let feed):
+                print("Title: \(feed.title)")
+                print("Description: \(feed.description)")
+                print("Episodes: \(feed.episodes.map { $0.title })")
+            case .failure(let error):
+                print("Error fetching RSS: \(error.localizedDescription)")
+            }
+        }
         return true
     }
 
