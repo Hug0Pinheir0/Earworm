@@ -17,6 +17,10 @@
 		478DD3222D43E7A800839239 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3212D43E7A800839239 /* Alamofire */; };
 		478DD3242D43E7A800839239 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3232D43E7A800839239 /* AlamofireDynamic */; };
 		478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3252D43EAFD00839239 /* RssFeed.swift */; };
+		478DD32F2D4434A900839239 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD32E2D4434A900839239 /* CustomTextField.swift */; };
+		478DD3312D44352D00839239 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3302D44352D00839239 /* CustomButton.swift */; };
+		478DD3332D44354E00839239 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3322D44354E00839239 /* CustomLabel.swift */; };
+		478DD3352D44356D00839239 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3342D44356D00839239 /* CustomImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		478DD31C2D43E41A00839239 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		478DD31E2D43E42700839239 /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		478DD3252D43EAFD00839239 /* RssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeed.swift; sourceTree = "<group>"; };
+		478DD32E2D4434A900839239 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		478DD3302D44352D00839239 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		478DD3322D44354E00839239 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		478DD3342D44356D00839239 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 		478DD3062D43DC3000839239 /* Earworm */ = {
 			isa = PBXGroup;
 			children = (
+				478DD32D2D44349300839239 /* Utils */,
 				478DD3272D44027B00839239 /* Modules */,
 				478DD31B2D43E3FF00839239 /* Networking */,
 				478DD3072D43DC3000839239 /* AppDelegate.swift */,
@@ -131,6 +140,17 @@
 			children = (
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		478DD32D2D44349300839239 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				478DD32E2D4434A900839239 /* CustomTextField.swift */,
+				478DD3302D44352D00839239 /* CustomButton.swift */,
+				478DD3322D44354E00839239 /* CustomLabel.swift */,
+				478DD3342D44356D00839239 /* CustomImageView.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,12 +230,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478DD32F2D4434A900839239 /* CustomTextField.swift in Sources */,
+				478DD3332D44354E00839239 /* CustomLabel.swift in Sources */,
 				478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
+				478DD3312D44352D00839239 /* CustomButton.swift in Sources */,
 				478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */,
 				478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */,
 				478DD31F2D43E42700839239 /* RSSParser.swift in Sources */,
+				478DD3352D44356D00839239 /* CustomImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
