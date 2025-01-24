@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3072D43DC3000839239 /* AppDelegate.swift */; };
 		478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3092D43DC3000839239 /* SceneDelegate.swift */; };
-		478DD30C2D43DC3000839239 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD30B2D43DC3000839239 /* ViewController.swift */; };
+		478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */; };
 		478DD3112D43DC3100839239 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 478DD3102D43DC3100839239 /* Assets.xcassets */; };
 		478DD3142D43DC3100839239 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 478DD3122D43DC3100839239 /* LaunchScreen.storyboard */; };
 		478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD31C2D43E41A00839239 /* NetworkService.swift */; };
@@ -23,7 +23,7 @@
 		478DD3042D43DC3000839239 /* Earworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478DD3072D43DC3000839239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		478DD3092D43DC3000839239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		478DD30B2D43DC3000839239 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedViewController.swift; sourceTree = "<group>"; };
 		478DD3102D43DC3100839239 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		478DD3132D43DC3100839239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		478DD3152D43DC3100839239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,10 +64,10 @@
 		478DD3062D43DC3000839239 /* Earworm */ = {
 			isa = PBXGroup;
 			children = (
+				478DD3272D44027B00839239 /* Modules */,
 				478DD31B2D43E3FF00839239 /* Networking */,
 				478DD3072D43DC3000839239 /* AppDelegate.swift */,
 				478DD3092D43DC3000839239 /* SceneDelegate.swift */,
-				478DD30B2D43DC3000839239 /* ViewController.swift */,
 				478DD3102D43DC3100839239 /* Assets.xcassets */,
 				478DD3122D43DC3100839239 /* LaunchScreen.storyboard */,
 				478DD3152D43DC3100839239 /* Info.plist */,
@@ -80,9 +80,57 @@
 			children = (
 				478DD31C2D43E41A00839239 /* NetworkService.swift */,
 				478DD31E2D43E42700839239 /* RSSParser.swift */,
-				478DD3252D43EAFD00839239 /* RssFeed.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		478DD3272D44027B00839239 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				478DD3282D44028600839239 /* RSSFeed */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		478DD3282D44028600839239 /* RSSFeed */ = {
+			isa = PBXGroup;
+			children = (
+				478DD3292D442FC600839239 /* Model */,
+				478DD32B2D442FF600839239 /* Presenter */,
+				478DD32C2D44317800839239 /* Protocols */,
+				478DD32A2D442FE600839239 /* View */,
+			);
+			path = RSSFeed;
+			sourceTree = "<group>";
+		};
+		478DD3292D442FC600839239 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				478DD3252D43EAFD00839239 /* RssFeed.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		478DD32A2D442FE600839239 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		478DD32B2D442FF600839239 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		478DD32C2D44317800839239 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,7 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				478DD30C2D43DC3000839239 /* ViewController.swift in Sources */,
+				478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
 				478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */,
