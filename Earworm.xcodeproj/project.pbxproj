@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */; };
+		4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */; };
 		478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3072D43DC3000839239 /* AppDelegate.swift */; };
 		478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3092D43DC3000839239 /* SceneDelegate.swift */; };
 		478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailsViewController.swift; sourceTree = "<group>"; };
+		4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		478DD3042D43DC3000839239 /* Earworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478DD3072D43DC3000839239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		478DD3092D43DC3000839239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		4774AC1C2D443FC600DE4DA3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 		4774AC212D44405100DE4DA3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,9 +328,11 @@
 				478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
+				4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */,
 				478DD3312D44352D00839239 /* CustomButton.swift in Sources */,
 				478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */,
 				478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */,
+				4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */,
 				478DD31F2D43E42700839239 /* RSSParser.swift in Sources */,
 				478DD3352D44356D00839239 /* CustomImageView.swift in Sources */,
 			);
