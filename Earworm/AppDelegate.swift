@@ -13,8 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let networkService = NetworkService()
-        networkService.fetchRSS(from: "https://feeds.megaphone.fm/la-cotorrisa") { result in
+        NetworkService.shared.fetchRSS(from: "https://feeds.megaphone.fm/la-cotorrisa") { result in
             switch result {
             case .success(let feed):
                 print("Title: \(feed.title)")

@@ -9,6 +9,11 @@ import Foundation
 import Alamofire
 
 class NetworkService {
+    
+    static let shared = NetworkService()
+    
+    private init() {}
+
     func fetchRSS(from urlString: String, completion: @escaping (Result<RSSFeed, Error>) -> Void) {
         AF.request(urlString).responseString { response in
             switch response.result {
