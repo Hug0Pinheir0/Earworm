@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RSSFeedViewController: UIViewController, RSSFeedViewProtocol {
+class RSSFeedViewController: UIViewController {
     
     // MARK: - UI Elements
     
@@ -80,14 +80,26 @@ class RSSFeedViewController: UIViewController, RSSFeedViewProtocol {
     @objc private func submitButtonTapped() {
         presenter?.handleSubmitButtonTapped(with: urlTextField.text)
     }
-    
-    // MARK: - RSSFeedViewProtocol
+}
+
+// MARK: - RSSFeedViewProtocol
+
+extension RSSFeedViewController: RSSFeedViewProtocol {
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Atenção", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    func updateUI(with feed: RSSFeed) {
+        print("Título: \(feed.title)")
+        print("Descrição: \(feed.description)")
+    }
 }
 
+#Preview {
+  let vc = RSSFeedViewController()
+    return vc
+}
 
 

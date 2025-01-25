@@ -11,10 +11,12 @@ class RSSFeedPresenter {
     
     // MARK: - Properties
     private weak var view: RSSFeedViewProtocol?
+    private let networkService: NetworkService
     
     // Inicializador
-    init(view: RSSFeedViewProtocol) {
+    init(view: RSSFeedViewProtocol, networkService: NetworkService = .shared) {
         self.view = view
+        self.networkService = networkService
     }
     
     // MARK: - Lógica de Negócio
@@ -30,8 +32,17 @@ class RSSFeedPresenter {
             return
         }
         
-        // Se a URL for válida
-        print("URL válida: \(urlString)")
+        
+        networkService.fetchRSS(from: urlString) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let feed):
+                    self?.view?.updateUI(with: feed) // Atualizar a UI com os dados do feed
+                case .failure(let error):
+                    self?.view?.showAlert(message: "Erro ao buscar o feed: \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     private func isValidURL(_ urlString: String) -> Bool {

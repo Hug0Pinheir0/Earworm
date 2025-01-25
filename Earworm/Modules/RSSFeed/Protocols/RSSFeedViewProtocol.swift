@@ -9,5 +9,6 @@ import Foundation
 
 protocol RSSFeedViewProtocol: AnyObject {
     func showAlert(message: String)
+    func updateUI(with feed: RSSFeed)
 }
 
