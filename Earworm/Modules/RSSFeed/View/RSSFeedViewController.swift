@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RSSFeedViewController: UIViewController {
+class RSSFeedViewController: UIViewController, RSSFeedViewProtocol {
     
     // MARK: - UI Elements
     
@@ -37,16 +37,18 @@ class RSSFeedViewController: UIViewController {
         return button
     }()
     
-    // MARK: - Lifecycle
+    // MARK: - Properties
+    var presenter: RSSFeedPresenter? // Presenter configurável após a criação
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Setup UI
-    
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
@@ -73,11 +75,19 @@ class RSSFeedViewController: UIViewController {
             make.height.equalTo(44)
         }
     }
+    
+    // MARK: - Actions
+    @objc private func submitButtonTapped() {
+        presenter?.handleSubmitButtonTapped(with: urlTextField.text)
+    }
+    
+    // MARK: - RSSFeedViewProtocol
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Atenção", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
 
-#Preview {
-  let vc = RSSFeedViewController()
-    return vc
-}
 
 

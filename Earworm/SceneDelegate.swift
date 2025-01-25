@@ -16,7 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = RSSFeedViewController()
+        let viewController = RSSFeedViewController()
+        
+        // Inicialize o Presenter e conecte com a ViewController
+        let presenter = RSSFeedPresenter(view: viewController)
+        viewController.presenter = presenter
+        window.rootViewController = viewController
         window.makeKeyAndVisible()
         
         self.window = window
