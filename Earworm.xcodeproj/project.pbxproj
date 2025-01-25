@@ -35,7 +35,7 @@
 		4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		4774AC2F2D446EBD00DE4DA3 /* RSSFeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSFeedPresenter.swift; path = Earworm/Modules/RSSFeed/Presenter/RSSFeedPresenter.swift; sourceTree = SOURCE_ROOT; };
-		4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSFeedViewProtocol.swift; path = Earworm/Modules/RSSFeed/RSSFeedViewProtocol.swift; sourceTree = SOURCE_ROOT; };
+		4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSFeedViewProtocol.swift; path = Earworm/Modules/RSSFeed/Protocols/RSSFeedViewProtocol.swift; sourceTree = SOURCE_ROOT; };
 		478DD3042D43DC3000839239 /* Earworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478DD3072D43DC3000839239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		478DD3092D43DC3000839239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,9 +200,9 @@
 		478DD3282D44028600839239 /* RSSFeed */ = {
 			isa = PBXGroup;
 			children = (
+				47AEB0502D4472E20080EBFE /* Protocols */,
 				478DD3292D442FC600839239 /* Model */,
 				478DD32B2D442FF600839239 /* Presenter */,
-				478DD32C2D44317800839239 /* Protocols */,
 				478DD32A2D442FE600839239 /* View */,
 			);
 			path = RSSFeed;
@@ -232,14 +232,6 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		478DD32C2D44317800839239 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		478DD32D2D44349300839239 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +242,14 @@
 				4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		47AEB0502D4472E20080EBFE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
