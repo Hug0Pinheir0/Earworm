@@ -26,8 +26,10 @@ class RSSFeedViewController: UIViewController {
         let textField = CustomTextField(
             placeholder: "Digite a URL do RSS"
         )
+        textField.text = "https://feeds.megaphone.fm/la-cotorrisa" // Define a URL fixa
         return textField
     }()
+
     
     private let submitButton: CustomButton = {
         let button = CustomButton(
@@ -92,8 +94,7 @@ extension RSSFeedViewController: RSSFeedViewProtocol {
     }
     
     func updateUI(with feed: RSSFeed) {
-        print("Título: \(feed.title)")
-        print("Descrição: \(feed.description)")
+        presenter?.navigateToDetails(with: feed)
     }
 }
 

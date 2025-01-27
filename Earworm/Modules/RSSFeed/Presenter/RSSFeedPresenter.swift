@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class RSSFeedPresenter {
     
@@ -48,6 +49,12 @@ class RSSFeedPresenter {
     private func isValidURL(_ urlString: String) -> Bool {
         guard let url = URL(string: urlString) else { return false }
         return url.scheme == "http" || url.scheme == "https"
+    }
+    
+    func navigateToDetails(with feed: RSSFeed) {
+        guard let viewController = view as? UIViewController else {return}
+        let detailsVC = PodcastDetailsViewController(feed: feed)
+        viewController.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
 
