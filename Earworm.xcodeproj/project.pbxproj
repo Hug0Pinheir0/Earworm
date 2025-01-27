@@ -28,6 +28,7 @@
 		478DD3352D44356D00839239 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3342D44356D00839239 /* CustomImageView.swift */; };
 		478DD3382D4438F200839239 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3372D4438F200839239 /* SnapKit */; };
 		478DD33A2D4438F200839239 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3392D4438F200839239 /* SnapKit-Dynamic */; };
+		47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		478DD3302D44352D00839239 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		478DD3322D44354E00839239 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		478DD3342D44356D00839239 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParserUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				478DD3322D44354E00839239 /* CustomLabel.swift */,
 				478DD3342D44356D00839239 /* CustomImageView.swift */,
 				4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */,
+				47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				4774AC302D446EBD00DE4DA3 /* RSSFeedPresenter.swift in Sources */,
 				478DD3332D44354E00839239 /* CustomLabel.swift in Sources */,
 				478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */,
+				47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */,
 				4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
