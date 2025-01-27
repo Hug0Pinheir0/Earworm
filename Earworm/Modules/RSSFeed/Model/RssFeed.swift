@@ -12,14 +12,14 @@ struct RSSFeed {
     let description: String
     let imageURL: String
     let authors: String
-    let category: String // Atualizado para refletir o dado real da API
+    let category: String
     let episodes: [Episode]
 }
 
 struct Episode {
     let title: String
+    let description: String
     let audioURL: URL
     let duration: String
 }
-
 

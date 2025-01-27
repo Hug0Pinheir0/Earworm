@@ -11,9 +11,10 @@ class RSSParser: NSObject, XMLParserDelegate {
     private var feedDescription = ""
     private var feedImageURL = ""
     private var feedAuthors = ""
-    private var feedCategory = "" // Renamed to reflect the XML tag
+    private var feedCategory = ""
     private var episodes: [Episode] = []
     private var currentEpisodeTitle = ""
+    private var currentEpisodeDescription = ""
     private var currentEpisodeAudioURL: URL?
     private var currentEpisodeDuration = ""
 
@@ -27,8 +28,15 @@ class RSSParser: NSObject, XMLParserDelegate {
             description: cleanDescription(feedDescription),
             imageURL: feedImageURL,
             authors: feedAuthors.trimmingCharacters(in: .whitespacesAndNewlines),
-            category: feedCategory.trimmingCharacters(in: .whitespacesAndNewlines), // Uses category as genre
-            episodes: episodes
+            category: feedCategory.trimmingCharacters(in: .whitespacesAndNewlines),
+            episodes: episodes.map { episode in
+                Episode(
+                    title: episode.title,
+                    description: cleanDescription(episode.description),
+                    audioURL: episode.audioURL,
+                    duration: episode.duration
+                )
+            }
         )
     }
 
@@ -59,11 +67,15 @@ class RSSParser: NSObject, XMLParserDelegate {
                 currentEpisodeTitle += trimmedString
             }
         case "description":
-            feedDescription += trimmedString
+            if episodes.isEmpty {
+                feedDescription += " " + trimmedString
+            } else {
+                currentEpisodeDescription += " " + trimmedString
+            }
         case "itunes:author":
             feedAuthors = trimmedString
         case "itunes:category":
-            feedCategory = trimmedString // Changed to use "category"
+            feedCategory = trimmedString
         case "itunes:duration":
             currentEpisodeDuration = trimmedString
         default:
@@ -77,12 +89,14 @@ class RSSParser: NSObject, XMLParserDelegate {
                 episodes.append(
                     Episode(
                         title: currentEpisodeTitle.trimmingCharacters(in: .whitespacesAndNewlines),
+                        description: currentEpisodeDescription.trimmingCharacters(in: .whitespacesAndNewlines),
                         audioURL: url,
                         duration: currentEpisodeDuration.trimmingCharacters(in: .whitespacesAndNewlines)
                     )
                 )
             }
             currentEpisodeTitle = ""
+            currentEpisodeDescription = ""
             currentEpisodeAudioURL = nil
             currentEpisodeDuration = ""
         }
