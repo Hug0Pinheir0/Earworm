@@ -187,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */,
+				4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */,
-				4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
