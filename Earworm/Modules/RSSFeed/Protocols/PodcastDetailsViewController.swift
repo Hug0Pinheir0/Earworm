@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import SDWebImage
 
 class PodcastDetailsViewController: UIViewController {
     
@@ -109,9 +110,8 @@ class PodcastDetailsViewController: UIViewController {
         authorsLabel.text = "Autores: \(feed.authors)"
         genreLabel.text = "Gênero: \(feed.category)"
         
-        // Carrega a imagem do podcast (exemplo com URL)
-        if let url = URL(string: feed.imageURL), let data = try? Data(contentsOf: url) {
-            podcastImageView.image = UIImage(data: data)
+        if let url = URL(string: feed.imageURL) {
+            podcastImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
         }
     }
 
