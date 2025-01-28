@@ -25,14 +25,14 @@ class RSSParser: NSObject, XMLParserDelegate {
         parser.parse()
         return RSSFeed(
             title: feedTitle.trimmingCharacters(in: .whitespacesAndNewlines),
-            description: cleanDescription(feedDescription),
+            description: RSSParserUtils.cleanDescription(feedDescription),
             imageURL: feedImageURL,
             authors: feedAuthors.trimmingCharacters(in: .whitespacesAndNewlines),
             category: feedCategory.trimmingCharacters(in: .whitespacesAndNewlines),
             episodes: episodes.map { episode in
                 Episode(
                     title: episode.title,
-                    description: cleanDescription(episode.description),
+                    description: RSSParserUtils.cleanDescription(episode.description),
                     audioURL: episode.audioURL,
                     duration: episode.duration
                 )
@@ -100,23 +100,5 @@ class RSSParser: NSObject, XMLParserDelegate {
             currentEpisodeAudioURL = nil
             currentEpisodeDuration = ""
         }
-    }
-
-    // MARK: - Helper Methods
-    private func cleanDescription(_ description: String) -> String {
-        // Remove links e texto desnecessário
-        let patternsToRemove = [
-            "Visit megaphone.fm/adchoices",
-            "Learn more about your ad choices."
-        ]
-        var cleanedDescription = description
-        for pattern in patternsToRemove {
-            cleanedDescription = cleanedDescription.replacingOccurrences(of: pattern, with: "")
-        }
-        // Trunca o texto se for muito longo
-        if cleanedDescription.count > 300 {
-            cleanedDescription = String(cleanedDescription.prefix(300)) + "..."
-        }
-        return cleanedDescription.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }

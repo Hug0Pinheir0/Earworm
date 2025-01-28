@@ -9,8 +9,9 @@ import Foundation
 import UIKit
 
 struct RSSParserUtils {
-    static func cleanDescription(_ description: String) -> String {
-        let patternsToRemove = [
+    
+   static func cleanDescription(_ description: String) -> String {
+         let patternsToRemove = [
             "Visit megaphone.fm/adchoices",
             "Learn more about your ad choices."
         ]
@@ -18,12 +19,12 @@ struct RSSParserUtils {
         for pattern in patternsToRemove {
             cleanedDescription = cleanedDescription.replacingOccurrences(of: pattern, with: "")
         }
-        if let plainText = convertHTMLToPlainText(html: cleanedDescription) {
-            cleanedDescription = plainText
+        if cleanedDescription.count > 300 {
+            cleanedDescription = String(cleanedDescription.prefix(300)) + "..."
         }
         return cleanedDescription.trimmingCharacters(in: .whitespacesAndNewlines)
     }
-
+    
     static func convertHTMLToPlainText(html: String) -> String? {
         guard let data = html.data(using: .utf8) else { return nil }
         do {
