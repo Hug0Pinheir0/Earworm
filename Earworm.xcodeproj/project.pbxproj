@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		47186F002D497D0B00AA8CB7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 47186EFF2D497D0B00AA8CB7 /* SDWebImage */; };
 		47186F022D497D0B00AA8CB7 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47186F012D497D0B00AA8CB7 /* SDWebImageMapKit */; };
+		47186F042D4981B900AA8CB7 /* URLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47186F032D4981B900AA8CB7 /* URLValidator.swift */; };
 		4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */; };
 		4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */; };
 		4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47186F032D4981B900AA8CB7 /* URLValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLValidator.swift; sourceTree = "<group>"; };
 		4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailsViewController.swift; sourceTree = "<group>"; };
 		4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				478DD3342D44356D00839239 /* CustomImageView.swift */,
 				4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */,
 				47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */,
+				47186F032D4981B900AA8CB7 /* URLValidator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */,
 				478DD3312D44352D00839239 /* CustomButton.swift in Sources */,
 				478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */,
+				47186F042D4981B900AA8CB7 /* URLValidator.swift in Sources */,
 				478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */,
 				4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */,
 				478DD31F2D43E42700839239 /* RSSParser.swift in Sources */,

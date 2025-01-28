@@ -28,11 +28,10 @@ class RSSFeedPresenter {
             return
         }
         
-        guard isValidURL(urlString) else {
-            view?.showAlert(message: "A URL inserida é inválida.")
-            return
-        }
-        
+        guard URLValidator.isValid(urlString) else {
+             view?.showAlert(message: "A URL inserida é inválida.")
+             return
+         }
         
         networkService.fetchRSS(from: urlString) { [weak self] result in
             DispatchQueue.main.async {
@@ -46,10 +45,6 @@ class RSSFeedPresenter {
         }
     }
     
-    private func isValidURL(_ urlString: String) -> Bool {
-        guard let url = URL(string: urlString) else { return false }
-        return url.scheme == "http" || url.scheme == "https"
-    }
     
     func navigateToDetails(with feed: RSSFeed) {
         guard let viewController = view as? UIViewController else {return}
