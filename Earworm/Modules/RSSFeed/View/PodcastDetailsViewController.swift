@@ -157,6 +157,16 @@ class EpisodeTableViewCell: UITableViewCell {
     private let titleLabel = CustomLabel(text: "", fontSize: 16, textColor: .black, alignment: .left)
     private let durationLabel = CustomLabel(text: "", fontSize: 14, textColor: .gray, alignment: .right)
 
+    private var episodeURL: URL?
+
+    private lazy var playButton: CustomButton = CustomButton(
+        title: "",
+        backgroundColor: .clear,
+        action: { [weak self] in
+            self?.playButtonTapped()
+        }
+    )
+
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -165,11 +175,23 @@ class EpisodeTableViewCell: UITableViewCell {
         return stackView
     }()
 
+    private var isPlaying = false {
+        didSet {
+            let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
+            playButton.setImage(UIImage(systemName: imageName), for: .normal)
+        }
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        playButton.tintColor = .systemBlue
+        
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(durationLabel)
+        stackView.addArrangedSubview(playButton)
 
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
@@ -183,5 +205,18 @@ class EpisodeTableViewCell: UITableViewCell {
     func configure(with episode: Episode) {
         titleLabel.text = episode.title
         durationLabel.text = "Duração: \(episode.duration)"
+        episodeURL = episode.audioURL
+    }
+
+    @objc private func playButtonTapped() {
+        guard let episodeURL = episodeURL else { return }
+        
+        if isPlaying {
+            AudioPlayerManager.shared.pause()
+        } else {
+            AudioPlayerManager.shared.play(url: episodeURL)
+        }
+
+        isPlaying.toggle()
     }
 }

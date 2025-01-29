@@ -11,6 +11,7 @@
 		47186F022D497D0B00AA8CB7 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47186F012D497D0B00AA8CB7 /* SDWebImageMapKit */; };
 		47186F042D4981B900AA8CB7 /* URLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47186F032D4981B900AA8CB7 /* URLValidator.swift */; };
 		47186F072D49CC9100AA8CB7 /* RSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47186F062D49CC9100AA8CB7 /* RSSCacheManager.swift */; };
+		47186F092D49D80E00AA8CB7 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47186F082D49D80E00AA8CB7 /* AudioPlayerManager.swift */; };
 		4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */; };
 		4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */; };
 		4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		47186F032D4981B900AA8CB7 /* URLValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLValidator.swift; sourceTree = "<group>"; };
 		47186F062D49CC9100AA8CB7 /* RSSCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSCacheManager.swift; sourceTree = "<group>"; };
+		47186F082D49D80E00AA8CB7 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailsViewController.swift; sourceTree = "<group>"; };
 		4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				478DD3252D43EAFD00839239 /* RssFeed.swift */,
 				47186F062D49CC9100AA8CB7 /* RSSCacheManager.swift */,
+				47186F082D49D80E00AA8CB7 /* AudioPlayerManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */,
 				4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */,
 				478DD31F2D43E42700839239 /* RSSParser.swift in Sources */,
+				47186F092D49D80E00AA8CB7 /* AudioPlayerManager.swift in Sources */,
 				478DD3352D44356D00839239 /* CustomImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
