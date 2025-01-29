@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RSSFeed {
+struct RSSFeed: Codable {
     let title: String
     let description: String
     let imageURL: String
@@ -16,7 +16,7 @@ struct RSSFeed {
     let episodes: [Episode]
 }
 
-struct Episode {
+struct Episode: Codable {
     let title: String
     let description: String
     let audioURL: URL

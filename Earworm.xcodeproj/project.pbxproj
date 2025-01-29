@@ -10,6 +10,7 @@
 		47186F002D497D0B00AA8CB7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 47186EFF2D497D0B00AA8CB7 /* SDWebImage */; };
 		47186F022D497D0B00AA8CB7 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47186F012D497D0B00AA8CB7 /* SDWebImageMapKit */; };
 		47186F042D4981B900AA8CB7 /* URLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47186F032D4981B900AA8CB7 /* URLValidator.swift */; };
+		47186F072D49CC9100AA8CB7 /* RSSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47186F062D49CC9100AA8CB7 /* RSSCacheManager.swift */; };
 		4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */; };
 		4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */; };
 		4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		47186F032D4981B900AA8CB7 /* URLValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLValidator.swift; sourceTree = "<group>"; };
+		47186F062D49CC9100AA8CB7 /* RSSCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSCacheManager.swift; sourceTree = "<group>"; };
 		4774AC232D4441CA00DE4DA3 /* PodcastDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailsViewController.swift; sourceTree = "<group>"; };
 		4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				478DD3252D43EAFD00839239 /* RssFeed.swift */,
+				47186F062D49CC9100AA8CB7 /* RSSCacheManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				4774AC322D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift in Sources */,
 				478DD32F2D4434A900839239 /* CustomTextField.swift in Sources */,
 				4774AC302D446EBD00DE4DA3 /* RSSFeedPresenter.swift in Sources */,
+				47186F072D49CC9100AA8CB7 /* RSSCacheManager.swift in Sources */,
 				478DD3332D44354E00839239 /* CustomLabel.swift in Sources */,
 				478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */,
 				47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */,

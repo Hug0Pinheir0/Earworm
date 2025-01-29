@@ -28,23 +28,28 @@ class RSSFeedPresenter {
             return
         }
         
+        if let cachedFeed = RSSCacheManager.load() {
+            view?.updateUI(with: cachedFeed)
+            return
+        }
+        
         guard URLValidator.isValid(urlString) else {
-             view?.showAlert(message: "A URL inserida é inválida.")
-             return
-         }
+            view?.showAlert(message: "A URL inserida é inválida.")
+            return
+        }
         
         networkService.fetchRSS(from: urlString) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let feed):
-                    self?.view?.updateUI(with: feed) // Atualizar a UI com os dados do feed
+                    RSSCacheManager.save(feed: feed) 
+                    self?.view?.updateUI(with: feed)
                 case .failure(let error):
                     self?.view?.showAlert(message: "Erro ao buscar o feed: \(error.localizedDescription)")
                 }
             }
         }
     }
-    
     
     func navigateToDetails(with feed: RSSFeed) {
         guard let viewController = view as? UIViewController else {return}

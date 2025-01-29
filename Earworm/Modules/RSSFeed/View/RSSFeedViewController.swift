@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 class RSSFeedViewController: UIViewController {
     
@@ -26,7 +27,7 @@ class RSSFeedViewController: UIViewController {
         let textField = CustomTextField(
             placeholder: "Digite a URL do RSS"
         )
-        textField.text = "https://feeds.megaphone.fm/la-cotorrisa" // Define a URL fixa
+        textField.text = "https://anchor.fm/s/7a186bc/podcast/rss" // Define a URL fixa
         return textField
     }()
 
@@ -39,6 +40,17 @@ class RSSFeedViewController: UIViewController {
         return button
     }()
     
+    private let clearCacheButton = CustomButton(
+        title: "Limpar Cache",
+        backgroundColor: .red,
+        action: {
+            SDImageCache.shared.clear(with: .all) {
+                print("Cache de imagens limpo!")
+            }
+            RSSCacheManager.clear()
+        }
+    )
+
     // MARK: - Properties
     var presenter: RSSFeedPresenter? // Presenter configurável após a criação
     
@@ -56,6 +68,7 @@ class RSSFeedViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(urlTextField)
         view.addSubview(submitButton)
+        view.addSubview(clearCacheButton)
     }
     
     private func setupConstraints() {
@@ -74,6 +87,13 @@ class RSSFeedViewController: UIViewController {
             make.top.equalTo(urlTextField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(100)
+            make.height.equalTo(44)
+        }
+
+        clearCacheButton.snp.makeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(16) 
+            make.centerX.equalToSuperview()
+            make.width.equalTo(150)
             make.height.equalTo(44)
         }
     }

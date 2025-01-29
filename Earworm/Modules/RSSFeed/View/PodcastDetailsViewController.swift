@@ -111,9 +111,14 @@ class PodcastDetailsViewController: UIViewController {
         genreLabel.text = "Gênero: \(feed.category)"
         
         if let url = URL(string: feed.imageURL) {
-            podcastImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+            podcastImageView.sd_setImage(
+                with: url,
+                placeholderImage: UIImage(named: "placeholder"),
+                options: [.continueInBackground, .highPriority]
+            )
         }
     }
+
 
     private func configureTableView() {
         episodesTableView.register(EpisodeTableViewCell.self, forCellReuseIdentifier: EpisodeTableViewCell.identifier)

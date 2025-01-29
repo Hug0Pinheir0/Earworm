@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,6 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let cache = SDImageCache.shared
+           cache.config.shouldCacheImagesInMemory = true
+           cache.config.shouldUseWeakMemoryCache = false
+           cache.config.maxDiskAge = 60 * 60 * 24 * 7
+
         return true
     }
 
