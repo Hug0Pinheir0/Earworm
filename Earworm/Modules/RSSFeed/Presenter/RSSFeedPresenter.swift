@@ -28,7 +28,7 @@ class RSSFeedPresenter {
             return
         }
         
-        if let cachedFeed = RSSCacheManager.load() {
+        if let cachedFeed = RSSCacheManager.load(for: urlString) {
             view?.updateUI(with: cachedFeed)
             return
         }
@@ -42,7 +42,7 @@ class RSSFeedPresenter {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let feed):
-                    RSSCacheManager.save(feed: feed) 
+                    RSSCacheManager.save(feed: feed, for: urlString)
                     self?.view?.updateUI(with: feed)
                 case .failure(let error):
                     self?.view?.showAlert(message: "Erro ao buscar o feed: \(error.localizedDescription)")

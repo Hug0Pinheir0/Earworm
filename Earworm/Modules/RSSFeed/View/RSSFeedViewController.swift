@@ -40,14 +40,20 @@ class RSSFeedViewController: UIViewController {
         return button
     }()
     
-    private let clearCacheButton = CustomButton(
+    private lazy var clearCacheButton = CustomButton(
         title: "Limpar Cache",
         backgroundColor: .red,
         action: {
             SDImageCache.shared.clear(with: .all) {
-                print("Cache de imagens limpo!")
+                print("🗑 Cache Imagem limpo!")
             }
-            RSSCacheManager.clear()
+
+            if let urlString = self.urlTextField.text, !urlString.isEmpty {
+                RSSCacheManager.clear(for: urlString)
+                print("🗑 Cache do RSS para \(urlString) limpo!")
+            } else {
+                print("⚠️ Nenhuma URL válida inserida para limpar o cache.")
+            }
         }
     )
 
