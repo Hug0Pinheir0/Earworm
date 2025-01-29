@@ -120,6 +120,7 @@ class PlayerViewController: UIViewController {
     }
 
     @objc private func nextEpisodeTapped() {
+        AudioPlayerManager.shared.stop()
         guard currentIndex < episodeList.count - 1 else { return }
         currentIndex += 1
         let nextEpisode = episodeList[currentIndex]
@@ -128,6 +129,7 @@ class PlayerViewController: UIViewController {
     }
 
     @objc private func previousEpisodeTapped() {
+        AudioPlayerManager.shared.stop()
         guard currentIndex > 0 else { return }
         currentIndex -= 1
         let previousEpisode = episodeList[currentIndex]
