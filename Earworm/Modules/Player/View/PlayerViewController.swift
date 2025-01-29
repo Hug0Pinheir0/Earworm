@@ -10,8 +10,12 @@ import SnapKit
 
 class PlayerViewController: UIViewController {
     
+    // MARK: - Properties
+    private var episode: Episode
+    private var episodeList: [Episode]
+    private var currentIndex: Int
+
     // MARK: - UI Elements
-    
     private let episodeTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -33,7 +37,6 @@ class PlayerViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         button.tintColor = .systemBlue
-        button.addTarget(PlayerViewController.self, action: #selector(playPauseTapped), for: .touchUpInside)
         return button
     }()
     
@@ -41,7 +44,6 @@ class PlayerViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "backward.fill"), for: .normal)
         button.tintColor = .gray
-        button.addTarget(PlayerViewController.self, action: #selector(previousEpisodeTapped), for: .touchUpInside)
         return button
     }()
     
@@ -49,19 +51,31 @@ class PlayerViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "forward.fill"), for: .normal)
         button.tintColor = .gray
-        button.addTarget(PlayerViewController.self, action: #selector(nextEpisodeTapped), for: .touchUpInside)
         return button
     }()
+
+    // MARK: - Initializer
+    init(episode: Episode, episodeList: [Episode], startIndex: Int) {
+        self.episode = episode
+        self.episodeList = episodeList
+        self.currentIndex = startIndex
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupActions()
         configureAudioPlayer()
+        updateUI()
     }
-    
+
     private func configureAudioPlayer() {
         AudioPlayerManager.shared.onProgressUpdate = { [weak self] progress in
             self?.progressBar.setProgress(progress, animated: true)
@@ -71,12 +85,17 @@ class PlayerViewController: UIViewController {
             self?.updateUI(with: episode)
         }
 
-        if let episode = AudioPlayerManager.shared.getCurrentEpisode() {
-            updateUI(with: episode)
-        }
+        // Iniciar a reprodução do episódio ao abrir a tela
+        AudioPlayerManager.shared.play(url: episode.audioURL)
+    }
+
+    private func updateUI() {
+        episodeTitleLabel.text = episode.title
+        updatePlayPauseButton()
     }
 
     private func updateUI(with episode: Episode) {
+        self.episode = episode
         episodeTitleLabel.text = episode.title
         updatePlayPauseButton()
     }
@@ -89,21 +108,34 @@ class PlayerViewController: UIViewController {
 
     // MARK: - Actions
     
+    private func setupActions() {
+        playPauseButton.addTarget(self, action: #selector(playPauseTapped), for: .touchUpInside)
+        previousEpisodeButton.addTarget(self, action: #selector(previousEpisodeTapped), for: .touchUpInside)
+        nextEpisodeButton.addTarget(self, action: #selector(nextEpisodeTapped), for: .touchUpInside)
+    }
+
     @objc private func playPauseTapped() {
         AudioPlayerManager.shared.playPause()
         updatePlayPauseButton()
     }
 
     @objc private func nextEpisodeTapped() {
-        AudioPlayerManager.shared.playNext()
+        guard currentIndex < episodeList.count - 1 else { return }
+        currentIndex += 1
+        let nextEpisode = episodeList[currentIndex]
+        AudioPlayerManager.shared.play(url: nextEpisode.audioURL)
+        updateUI(with: nextEpisode)
     }
 
     @objc private func previousEpisodeTapped() {
-        AudioPlayerManager.shared.playPrevious()
+        guard currentIndex > 0 else { return }
+        currentIndex -= 1
+        let previousEpisode = episodeList[currentIndex]
+        AudioPlayerManager.shared.play(url: previousEpisode.audioURL)
+        updateUI(with: previousEpisode)
     }
 
     // MARK: - UI Setup
-    
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(episodeTitleLabel)
@@ -142,9 +174,5 @@ class PlayerViewController: UIViewController {
             make.width.height.equalTo(50)
         }
     }
-}
-
-#Preview {
-    PlayerViewController()
 }
 

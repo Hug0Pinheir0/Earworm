@@ -145,6 +145,13 @@ extension PodcastDetailsViewController: UITableViewDataSource, UITableViewDelega
         cell.delegate = self
         return cell
     }
+    
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let selectedEpisode = feed.episodes[indexPath.row]
+            let playerVC = PlayerViewController(episode: selectedEpisode, episodeList: feed.episodes, startIndex: indexPath.row)
+            navigationController?.pushViewController(playerVC, animated: true)
+    }
 }
 
 // MARK: - EpisodePlaybackDelegate
