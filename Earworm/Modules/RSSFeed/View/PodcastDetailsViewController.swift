@@ -15,6 +15,7 @@ class PodcastDetailsViewController: UIViewController {
     // MARK: - Properties
     private var feed: RSSFeed
     private let episodesTableView = UITableView() // Tabela para listar os episódios
+    private var currentlyPlayingCell: EpisodeTableViewCell?
     
     // MARK: - UI Elements
 
@@ -141,31 +142,45 @@ extension PodcastDetailsViewController: UITableViewDataSource, UITableViewDelega
         }
         let episode = feed.episodes[indexPath.row]
         cell.configure(with: episode)
+        cell.delegate = self
         return cell
     }
+}
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        // Implementar lógica para iniciar reprodução do episódio
+// MARK: - EpisodePlaybackDelegate
+extension PodcastDetailsViewController: EpisodePlaybackDelegate {
+    func didTapPlayPause(for episode: Episode, in cell: EpisodeTableViewCell) {
+        if AudioPlayerManager.shared.isPlaying() {
+            AudioPlayerManager.shared.pause()
+            currentlyPlayingCell?.togglePlayPauseState()
+            currentlyPlayingCell = nil
+        } else {
+            AudioPlayerManager.shared.play(url: episode.audioURL)
+            currentlyPlayingCell?.togglePlayPauseState()
+            currentlyPlayingCell = cell
+            currentlyPlayingCell?.togglePlayPauseState()
+        }
     }
 }
 
 // MARK: - EpisodeTableViewCell
 class EpisodeTableViewCell: UITableViewCell {
+    
     static let identifier = "EpisodeTableViewCell"
+    weak var delegate: EpisodePlaybackDelegate?
 
     private let titleLabel = CustomLabel(text: "", fontSize: 16, textColor: .black, alignment: .left)
     private let durationLabel = CustomLabel(text: "", fontSize: 14, textColor: .gray, alignment: .right)
-
-    private var episodeURL: URL?
-
-    private lazy var playButton: CustomButton = CustomButton(
-        title: "",
-        backgroundColor: .clear,
-        action: { [weak self] in
-            self?.playButtonTapped()
-        }
-    )
+    
+    private var episode: Episode?
+    
+    private lazy var playButton: CustomButton = {
+        let button = CustomButton(title: "", backgroundColor: .clear)
+        button.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        button.tintColor = .systemBlue
+        button.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        return button
+    }()
 
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -203,20 +218,20 @@ class EpisodeTableViewCell: UITableViewCell {
     }
 
     func configure(with episode: Episode) {
+        self.episode = episode
         titleLabel.text = episode.title
         durationLabel.text = "Duração: \(episode.duration)"
-        episodeURL = episode.audioURL
     }
 
     @objc private func playButtonTapped() {
-        guard let episodeURL = episodeURL else { return }
-        
-        if isPlaying {
-            AudioPlayerManager.shared.pause()
-        } else {
-            AudioPlayerManager.shared.play(url: episodeURL)
-        }
+        guard let episode = episode else { return }
+        delegate?.didTapPlayPause(for: episode, in: self)
+    }
 
+    func togglePlayPauseState() {
         isPlaying.toggle()
     }
 }
+
+
+

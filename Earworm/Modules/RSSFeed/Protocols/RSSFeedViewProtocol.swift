@@ -12,3 +12,7 @@ protocol RSSFeedViewProtocol: AnyObject {
     func updateUI(with feed: RSSFeed)
 }
 
+protocol EpisodePlaybackDelegate: AnyObject {
+    func didTapPlayPause(for episode: Episode, in cell: EpisodeTableViewCell)
+}
+

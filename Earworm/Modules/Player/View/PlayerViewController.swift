@@ -5,7 +5,6 @@
 //  Created by Hugo Pinheiro  on 24/01/25.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
@@ -15,7 +14,6 @@ class PlayerViewController: UIViewController {
     
     private let episodeTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Título do Episódio"
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         label.textAlignment = .center
@@ -25,7 +23,7 @@ class PlayerViewController: UIViewController {
     
     private let progressBar: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
-        progressView.progress = 0.3 // Placeholder progress
+        progressView.progress = 0.0
         progressView.tintColor = .systemBlue
         progressView.trackTintColor = .lightGray
         return progressView
@@ -33,34 +31,25 @@ class PlayerViewController: UIViewController {
     
     private let playPauseButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Play", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.clipsToBounds = true
+        button.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        button.tintColor = .systemBlue
+        button.addTarget(PlayerViewController.self, action: #selector(playPauseTapped), for: .touchUpInside)
         return button
     }()
     
     private let previousEpisodeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("◀", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        button.backgroundColor = .gray
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.clipsToBounds = true
+        button.setImage(UIImage(systemName: "backward.fill"), for: .normal)
+        button.tintColor = .gray
+        button.addTarget(PlayerViewController.self, action: #selector(previousEpisodeTapped), for: .touchUpInside)
         return button
     }()
     
     private let nextEpisodeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("▶", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        button.backgroundColor = .gray
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.clipsToBounds = true
+        button.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+        button.tintColor = .gray
+        button.addTarget(PlayerViewController.self, action: #selector(nextEpisodeTapped), for: .touchUpInside)
         return button
     }()
     
@@ -70,9 +59,50 @@ class PlayerViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        configureAudioPlayer()
     }
     
-    // MARK: - Setup UI
+    private func configureAudioPlayer() {
+        AudioPlayerManager.shared.onProgressUpdate = { [weak self] progress in
+            self?.progressBar.setProgress(progress, animated: true)
+        }
+
+        AudioPlayerManager.shared.onEpisodeChange = { [weak self] episode in
+            self?.updateUI(with: episode)
+        }
+
+        if let episode = AudioPlayerManager.shared.getCurrentEpisode() {
+            updateUI(with: episode)
+        }
+    }
+
+    private func updateUI(with episode: Episode) {
+        episodeTitleLabel.text = episode.title
+        updatePlayPauseButton()
+    }
+
+    private func updatePlayPauseButton() {
+        let isPlaying = AudioPlayerManager.shared.isPlaying()
+        let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
+        playPauseButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+
+    // MARK: - Actions
+    
+    @objc private func playPauseTapped() {
+        AudioPlayerManager.shared.playPause()
+        updatePlayPauseButton()
+    }
+
+    @objc private func nextEpisodeTapped() {
+        AudioPlayerManager.shared.playNext()
+    }
+
+    @objc private func previousEpisodeTapped() {
+        AudioPlayerManager.shared.playPrevious()
+    }
+
+    // MARK: - UI Setup
     
     private func setupUI() {
         view.backgroundColor = .white
@@ -97,17 +127,17 @@ class PlayerViewController: UIViewController {
         playPauseButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(progressBar.snp.bottom).offset(40)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(60)
         }
         
         previousEpisodeButton.snp.makeConstraints { make in
-            make.trailing.equalTo(playPauseButton.snp.leading).offset(-20)
+            make.trailing.equalTo(playPauseButton.snp.leading).offset(-40)
             make.centerY.equalTo(playPauseButton)
             make.width.height.equalTo(50)
         }
         
         nextEpisodeButton.snp.makeConstraints { make in
-            make.leading.equalTo(playPauseButton.snp.trailing).offset(20)
+            make.leading.equalTo(playPauseButton.snp.trailing).offset(40)
             make.centerY.equalTo(playPauseButton)
             make.width.height.equalTo(50)
         }
@@ -115,6 +145,6 @@ class PlayerViewController: UIViewController {
 }
 
 #Preview {
-  let vc = PlayerViewController()
-    return vc
+    PlayerViewController()
 }
+
