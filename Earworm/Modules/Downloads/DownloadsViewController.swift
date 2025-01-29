@@ -88,5 +88,15 @@ extension DownloadsViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: episode)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !downloadedEpisodes.isEmpty else { return }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedEpisode = downloadedEpisodes[indexPath.row]
+        NavigationManager.shared.showPlayer(from: self, with: selectedEpisode, episodesList: downloadedEpisodes, startIndex: indexPath.row)
+    }
 }
+
+
 

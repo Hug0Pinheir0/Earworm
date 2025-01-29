@@ -63,6 +63,7 @@ class RSSFeedViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = RSSFeedPresenter(view: self)
         setupUI()
         setupConstraints()
         submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
@@ -120,7 +121,9 @@ extension RSSFeedViewController: RSSFeedViewProtocol {
     }
     
     func updateUI(with feed: RSSFeed) {
-        presenter?.navigateToDetails(with: feed)
+        DispatchQueue.main.async {
+            self.presenter?.navigateToDetails(with: feed) 
+        }
     }
 }
 
@@ -128,5 +131,3 @@ extension RSSFeedViewController: RSSFeedViewProtocol {
   let vc = RSSFeedViewController()
     return vc
 }
-
-

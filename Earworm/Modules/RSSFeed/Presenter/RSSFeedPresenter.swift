@@ -29,7 +29,9 @@ class RSSFeedPresenter {
         }
         
         if let cachedFeed = RSSCacheManager.load(for: urlString) {
-            view?.updateUI(with: cachedFeed)
+            DispatchQueue.main.async {
+                self.view?.updateUI(with: cachedFeed) 
+            }
             return
         }
         
@@ -52,9 +54,8 @@ class RSSFeedPresenter {
     }
     
     func navigateToDetails(with feed: RSSFeed) {
-        guard let viewController = view as? UIViewController else {return}
-        let detailsVC = PodcastDetailsViewController(feed: feed)
-        viewController.navigationController?.pushViewController(detailsVC, animated: true)
+        guard let viewController = view as? UIViewController else { return }
+        NavigationManager.shared.showPodcastDetails(from: viewController, with: feed)
     }
 }
 
