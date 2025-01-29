@@ -34,6 +34,7 @@
 		478DD3382D4438F200839239 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3372D4438F200839239 /* SnapKit */; };
 		478DD33A2D4438F200839239 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3392D4438F200839239 /* SnapKit-Dynamic */; };
 		47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */; };
+		47F209642D4A6202004B54EE /* EpisodePlaybackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209632D4A6202004B54EE /* EpisodePlaybackDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		478DD3322D44354E00839239 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		478DD3342D44356D00839239 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParserUtils.swift; sourceTree = "<group>"; };
+		47F209632D4A6202004B54EE /* EpisodePlaybackDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlaybackDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */,
+				47F209632D4A6202004B54EE /* EpisodePlaybackDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
 				4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */,
+				47F209642D4A6202004B54EE /* EpisodePlaybackDelegate.swift in Sources */,
 				478DD3312D44352D00839239 /* CustomButton.swift in Sources */,
 				478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */,
 				47186F042D4981B900AA8CB7 /* URLValidator.swift in Sources */,
