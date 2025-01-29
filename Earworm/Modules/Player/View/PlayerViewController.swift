@@ -100,12 +100,6 @@ class PlayerViewController: UIViewController {
         updatePlayPauseButton()
     }
 
-    private func updatePlayPauseButton() {
-        let isPlaying = AudioPlayerManager.shared.isPlaying()
-        let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
-        playPauseButton.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-
     // MARK: - Actions
     
     private func setupActions() {
@@ -115,13 +109,17 @@ class PlayerViewController: UIViewController {
     }
 
     @objc private func playPauseTapped() {
-        AudioPlayerManager.shared.playPause()
+        if AudioPlayerManager.shared.isPlaying() {
+            AudioPlayerManager.shared.pause()
+        } else {
+            AudioPlayerManager.shared.play(url: episode.audioURL)
+        }
         updatePlayPauseButton()
     }
 
     @objc private func nextEpisodeTapped() {
-        AudioPlayerManager.shared.stop()
         guard currentIndex < episodeList.count - 1 else { return }
+        AudioPlayerManager.shared.stop()
         currentIndex += 1
         let nextEpisode = episodeList[currentIndex]
         AudioPlayerManager.shared.play(url: nextEpisode.audioURL)
@@ -129,14 +127,20 @@ class PlayerViewController: UIViewController {
     }
 
     @objc private func previousEpisodeTapped() {
-        AudioPlayerManager.shared.stop()
         guard currentIndex > 0 else { return }
+        AudioPlayerManager.shared.stop()
         currentIndex -= 1
         let previousEpisode = episodeList[currentIndex]
         AudioPlayerManager.shared.play(url: previousEpisode.audioURL)
         updateUI(with: previousEpisode)
     }
 
+    private func updatePlayPauseButton() {
+        let isPlaying = AudioPlayerManager.shared.isPlaying()
+        let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
+        playPauseButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .white
