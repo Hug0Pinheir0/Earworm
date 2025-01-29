@@ -40,6 +40,7 @@
 		47F2096D2D4AA5EE004B54EE /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F2096C2D4AA5EE004B54EE /* CustomTabBarController.swift */; };
 		47F209702D4AA8D9004B54EE /* DownloadEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F2096F2D4AA8D9004B54EE /* DownloadEpisodeCell.swift */; };
 		47F209722D4AA8E7004B54EE /* DownloadsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209712D4AA8E7004B54EE /* DownloadsManager.swift */; };
+		47F209742D4AAD7F004B54EE /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209732D4AAD7F004B54EE /* NavigationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		47F2096C2D4AA5EE004B54EE /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		47F2096F2D4AA8D9004B54EE /* DownloadEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadEpisodeCell.swift; sourceTree = "<group>"; };
 		47F209712D4AA8E7004B54EE /* DownloadsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsManager.swift; sourceTree = "<group>"; };
+		47F209732D4AAD7F004B54EE /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 				47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */,
 				47186F032D4981B900AA8CB7 /* URLValidator.swift */,
 				47F2096C2D4AA5EE004B54EE /* CustomTabBarController.swift */,
+				47F209732D4AAD7F004B54EE /* NavigationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				47F209722D4AA8E7004B54EE /* DownloadsManager.swift in Sources */,
 				47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */,
 				4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */,
+				47F209742D4AAD7F004B54EE /* NavigationManager.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
 				4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */,
