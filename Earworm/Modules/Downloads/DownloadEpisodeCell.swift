@@ -8,20 +8,17 @@
 import Foundation
 import UIKit
 
-class DownloadEpisodeCell: UITableViewCell {
-    
-    static let identifier = "DownloadEpisodeCell"
+class DownloadEpisodeCell: BaseTableViewCell {
+
+    weak var delegate: DownloadEpisodeCellDelegate?
 
     private let titleLabel = CustomLabel(text: "", fontSize: 16, textColor: .black, alignment: .left)
     
-    private let deleteButton: CustomButton = {
-        let button = CustomButton(
-            title: "",
-            backgroundColor: .clear,
-            action: nil
-        )
+    private lazy var deleteButton: CustomButton = {
+        let button = CustomButton(title: "", backgroundColor: .clear)
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.tintColor = .red
+        button.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         return button
     }()
 
@@ -35,31 +32,14 @@ class DownloadEpisodeCell: UITableViewCell {
 
     private var episode: Episode?
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
-        
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(deleteButton)
-
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(16)
-        }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(with episode: Episode) {
+     func configure(with episode: Episode) {
         self.episode = episode
         titleLabel.text = episode.title
     }
 
+
     @objc private func deleteTapped() {
         guard let episode = episode else { return }
-        DownloadsManager.shared.removeEpisode(episode)
+        delegate?.didTapDelete(for: episode)
     }
 }

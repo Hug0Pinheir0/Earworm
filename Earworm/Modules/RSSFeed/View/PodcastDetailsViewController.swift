@@ -10,15 +10,13 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-class PodcastDetailsViewController: UIViewController {
+class PodcastDetailsViewController: BaseTableViewController<Episode, EpisodeTableViewCell> {
     
     // MARK: - Properties
     private var feed: RSSFeed
-    private let episodesTableView = UITableView() // Tabela para listar os episódios
     private var currentlyPlayingCell: EpisodeTableViewCell?
     
     // MARK: - UI Elements
-
     private let titleLabel: UILabel = {
         let label = CustomLabel(text: "Título do Podcast", fontSize: 24, textColor: .black, alignment: .center)
         label.font = UIFont.boldSystemFont(ofSize: 24)
@@ -63,11 +61,11 @@ class PodcastDetailsViewController: UIViewController {
         setupUI()
         setupConstraints()
         populateUI()
-        configureTableView()
+        items = feed.episodes
+        tableView.reloadData()
     }
     
     // MARK: - Setup UI
-
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
@@ -79,7 +77,7 @@ class PodcastDetailsViewController: UIViewController {
         podcastDetailsStackView.addArrangedSubview(genreLabel)
 
         view.addSubview(podcastDetailsStackView)
-        view.addSubview(episodesTableView)
+        view.addSubview(tableView)
     }
 
     private func setupConstraints() {
@@ -99,7 +97,7 @@ class PodcastDetailsViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
-        episodesTableView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.top.equalTo(podcastDetailsStackView.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview().inset(16)
         }
@@ -120,38 +118,15 @@ class PodcastDetailsViewController: UIViewController {
         }
     }
 
-
-    private func configureTableView() {
-        episodesTableView.register(EpisodeTableViewCell.self, forCellReuseIdentifier: EpisodeTableViewCell.identifier)
-        episodesTableView.dataSource = self
-        episodesTableView.delegate = self
-        episodesTableView.rowHeight = UITableView.automaticDimension
-        episodesTableView.estimatedRowHeight = 100
-    }
-}
-
-// MARK: - UITableViewDataSource, UITableViewDelegate
-extension PodcastDetailsViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feed.episodes.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: EpisodeTableViewCell.identifier, for: indexPath) as? EpisodeTableViewCell else {
-            return UITableViewCell()
-        }
-        let episode = feed.episodes[indexPath.row]
-        cell.configure(with: episode)
+    override func configureCell(_ cell: EpisodeTableViewCell, with item: Episode) {
+        cell.configure(with: item)
         cell.delegate = self
-        return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+
+    override func didSelectItem(_ item: Episode, at indexPath: IndexPath) {
         let selectedEpisode = feed.episodes[indexPath.row]
         NavigationManager.shared.showPlayer(from: self, with: selectedEpisode, episodesList: feed.episodes, startIndex: indexPath.row)
     }
-    
 }
 
 // MARK: - EpisodePlaybackDelegate
@@ -169,78 +144,3 @@ extension PodcastDetailsViewController: EpisodePlaybackDelegate {
         }
     }
 }
-
-// MARK: - EpisodeTableViewCell
-class EpisodeTableViewCell: UITableViewCell {
-    
-    static let identifier = "EpisodeTableViewCell"
-    weak var delegate: EpisodePlaybackDelegate?
-
-    private let titleLabel = CustomLabel(text: "", fontSize: 16, textColor: .black, alignment: .left)
-    private let durationLabel = CustomLabel(text: "", fontSize: 14, textColor: .gray, alignment: .right)
-    
-    private var episode: Episode?
-    
-    private lazy var playButton: CustomButton = {
-        let button = CustomButton(title: "", backgroundColor: .clear)
-        button.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-        button.tintColor = .systemBlue
-        button.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        return button
-    }()
-
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.alignment = .center
-        return stackView
-    }()
-
-    private var isPlaying = false {
-        didSet {
-            let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
-            playButton.setImage(UIImage(systemName: imageName), for: .normal)
-        }
-    }
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-        playButton.tintColor = .systemBlue
-        
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(durationLabel)
-        stackView.addArrangedSubview(playButton)
-
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(16)
-        }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(with episode: Episode) {
-        self.episode = episode
-        titleLabel.text = episode.title
-        durationLabel.text = "Duração: \(episode.duration)"
-    }
-
-    @objc private func playButtonTapped() {
-        guard let episode = episode else { return }
-        delegate?.didTapPlayPause(for: episode, in: self)
-    }
-
-    func togglePlayPauseState() {
-        isPlaying.toggle()
-    }
-}
-
-
-
-
-

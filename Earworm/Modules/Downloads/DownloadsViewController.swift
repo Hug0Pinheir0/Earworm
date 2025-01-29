@@ -9,94 +9,73 @@ import Foundation
 import UIKit
 import SnapKit
 
-class DownloadsViewController: UIViewController {
-    
-    // MARK: - Properties
-    private var downloadedEpisodes: [Episode] = []
+class DownloadsViewController: BaseTableViewController<Episode, DownloadEpisodeCell> {
 
     // MARK: - UI Elements
     private let titleLabel: CustomLabel = {
         return CustomLabel(text: "Downloads", fontSize: 24, textColor: .black, alignment: .center)
     }()
-    
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(DownloadEpisodeCell.self, forCellReuseIdentifier: DownloadEpisodeCell.identifier)
-        tableView.separatorStyle = .none
-        return tableView
-    }()
-    
+
     private let emptyStateLabel: CustomLabel = {
         return CustomLabel(text: "Nenhum episódio baixado", fontSize: 16, textColor: .gray, alignment: .center)
     }()
-    
+
+    private let contentView = UIView()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupConstraints()
-        setupTableView()
         loadDownloads()
     }
 
     private func setupUI() {
-        view.backgroundColor = .white
-        view.addSubview(titleLabel)
-        view.addSubview(tableView)
-        view.addSubview(emptyStateLabel)
-    }
-    
-    private func setupConstraints() {
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(100) // Define um tamanho fixo para o header
+        }
+
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(20)
         }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.bottom.equalToSuperview().inset(16)
-        }
-        
+
+        view.addSubview(emptyStateLabel)
         emptyStateLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-    }
 
-    private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
+        emptyStateLabel.isHidden = true
     }
 
     private func loadDownloads() {
-        downloadedEpisodes = DownloadsManager.shared.getDownloadedEpisodes()
+        items = DownloadsManager.shared.getDownloadedEpisodes()
         tableView.reloadData()
-        emptyStateLabel.isHidden = !downloadedEpisodes.isEmpty
+        updateUIState()
+    }
+
+    private func updateUIState() {
+        let hasDownloads = !items.isEmpty
+        tableView.isHidden = !hasDownloads
+        emptyStateLabel.isHidden = hasDownloads
+    }
+
+    override func configureCell(_ cell: DownloadEpisodeCell, with item: Episode) {
+        cell.configure(with: item)
+        cell.delegate = self
+    }
+
+    override func didSelectItem(_ item: Episode, at indexPath: IndexPath) {
+        NavigationManager.shared.showPlayer(from: self, with: item, episodesList: items, startIndex: indexPath.row)
     }
 }
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
-extension DownloadsViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return downloadedEpisodes.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DownloadEpisodeCell.identifier, for: indexPath) as? DownloadEpisodeCell else {
-            return UITableViewCell()
-        }
-        let episode = downloadedEpisodes[indexPath.row]
-        cell.configure(with: episode)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard !downloadedEpisodes.isEmpty else { return }
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let selectedEpisode = downloadedEpisodes[indexPath.row]
-        NavigationManager.shared.showPlayer(from: self, with: selectedEpisode, episodesList: downloadedEpisodes, startIndex: indexPath.row)
+// MARK: - DownloadEpisodeCellDelegate
+extension DownloadsViewController: DownloadEpisodeCellDelegate {
+    func didTapDelete(for episode: Episode) {
+        DownloadsManager.shared.removeEpisode(episode)
+        loadDownloads()
     }
 }
-
-
-
