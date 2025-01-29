@@ -82,26 +82,9 @@
 		4774AC1E2D44401E00DE4DA3 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				4774AC222D44406900DE4DA3 /* Protocols */,
 				4774AC212D44405100DE4DA3 /* View */,
-				4774AC202D44404300DE4DA3 /* Presenter */,
-				4774AC1F2D44403300DE4DA3 /* Model */,
 			);
 			path = Player;
-			sourceTree = "<group>";
-		};
-		4774AC1F2D44403300DE4DA3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4774AC202D44404300DE4DA3 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		4774AC212D44405100DE4DA3 /* View */ = {
@@ -110,13 +93,6 @@
 				4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		4774AC222D44406900DE4DA3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		478DD2FB2D43DC3000839239 = {
