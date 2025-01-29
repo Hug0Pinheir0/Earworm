@@ -13,21 +13,45 @@ class BaseTableViewController<T, Cell: BaseTableViewCell>: UIViewController, UIT
     
     // MARK: - Properties
     var items: [T] = []
-    let tableView = UITableView()
     
+    private let contentContainer = UIView()
+    let tableView = UITableView()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        setupUI()
+        setupConstraints()
     }
 
-    private func setupTableView() {
+    private func setupUI() {
+        view.backgroundColor = .white
+        view.addSubview(contentContainer)
         view.addSubview(tableView)
-        tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(Cell.self, forCellReuseIdentifier: String(describing: Cell.self))
+    }
+
+    private func setupConstraints() {
+        contentContainer.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
+
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(contentContainer.snp.bottom).offset(16)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+
+    // MARK: - Content View Management
+    func addContentView(_ view: UIView) {
+        contentContainer.addSubview(view)
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     // MARK: - UITableViewDataSource
@@ -43,12 +67,13 @@ class BaseTableViewController<T, Cell: BaseTableViewCell>: UIViewController, UIT
         return cell
     }
     
-    // MARK: - Métodos personalizáveis
-    func configureCell(_ cell: Cell, with item: T) { }
-    func didSelectItem(_ item: T, at indexPath: IndexPath) { }
-    
+    open func configureCell(_ cell: Cell, with item: T) { }
+
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectItem(items[indexPath.row], at: indexPath)
+        let selectedItem = items[indexPath.row]
+        didSelectItem(selectedItem, at: indexPath)
     }
+    
+    open func didSelectItem(_ item: T, at indexPath: IndexPath) { }
 }
