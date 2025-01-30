@@ -40,6 +40,10 @@ class BaseTableViewController<T, Cell: BaseTableViewCell>: UIViewController, UIT
             make.leading.trailing.equalToSuperview()
         }
 
+        configureTableConstraints()
+    }
+
+    func configureTableConstraints() {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(contentContainer.snp.bottom).offset(16)
             make.leading.trailing.bottom.equalToSuperview()

@@ -26,6 +26,11 @@ class DownloadsViewController: BaseTableViewController<Episode, DownloadEpisodeC
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadDownloads()
     }
 
@@ -49,9 +54,18 @@ class DownloadsViewController: BaseTableViewController<Episode, DownloadEpisodeC
 
         emptyStateLabel.isHidden = true
     }
+    
+    override func configureTableConstraints() {
+        tableView.snp.remakeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide) // Ocupa toda a tela
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+
 
     private func loadDownloads() {
-        items = DownloadsManager.shared.getDownloadedEpisodes()
+        let episodes = DownloadsManager.shared.getDownloadedEpisodes()
+        self.items = episodes
         tableView.reloadData()
         updateUIState()
     }

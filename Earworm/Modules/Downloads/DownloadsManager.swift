@@ -53,14 +53,10 @@ class DownloadsManager {
     func saveDownloadedEpisode(_ episode: Episode) {
         var episodes = getDownloadedEpisodes()
         
-        print("🔍 Antes de salvar:", episodes.map { $0.title }) // Debug antes
-
         if !episodes.contains(where: { $0.audioURL == episode.audioURL }) {
             episodes.append(episode)
             saveToUserDefaults(episodes)
         }
-
-        print("✅ Após salvar:", episodes.map { $0.title }) // Debug depois
     }
 
     func removeEpisode(_ episode: Episode) {
