@@ -26,6 +26,14 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
         label.textAlignment = .center // ✅ Centraliza o texto
         return label
     }()
+    
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .red
+        button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
+        return button
+    }()
 
     
     private let progressBar: UIProgressView = {
@@ -72,6 +80,7 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
         setupActions()
         presenter.checkDownloadStatus()
         presenter.startPlayback()
+        updateFavoriteState()
     }
 
     // MARK: - Setup UI
@@ -85,6 +94,7 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
         nextEpisodeButton.setImage(UIImage(systemName: "forward.fill"), for: .normal)
 
         view.addSubview(episodeTitleLabel)
+        view.addSubview(favoriteButton)
         view.addSubview(progressBar)
         view.addSubview(playPauseButton)
         view.addSubview(previousEpisodeButton)
@@ -93,45 +103,51 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     }
 
     private func setupConstraints() {
-        episodeTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
+           episodeTitleLabel.snp.makeConstraints { make in
+               make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+               make.centerX.equalToSuperview()
+           }
 
-        progressBar.snp.makeConstraints { make in
-            make.top.equalTo(episodeTitleLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
+           progressBar.snp.makeConstraints { make in
+               make.top.equalTo(episodeTitleLabel.snp.bottom).offset(20)
+               make.leading.trailing.equalToSuperview().inset(16)
+           }
 
-        playPauseButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(progressBar.snp.bottom).offset(40)
-            make.width.height.equalTo(60)
-        }
+           playPauseButton.snp.makeConstraints { make in
+               make.centerX.equalToSuperview()
+               make.top.equalTo(progressBar.snp.bottom).offset(40)
+               make.width.height.equalTo(60)
+           }
 
-        previousEpisodeButton.snp.makeConstraints { make in
-            make.trailing.equalTo(playPauseButton.snp.leading).offset(-40)
-            make.centerY.equalTo(playPauseButton)
-        }
+           previousEpisodeButton.snp.makeConstraints { make in
+               make.trailing.equalTo(playPauseButton.snp.leading).offset(-40)
+               make.centerY.equalTo(playPauseButton)
+           }
 
-        nextEpisodeButton.snp.makeConstraints { make in
-            make.leading.equalTo(playPauseButton.snp.trailing).offset(40)
-            make.centerY.equalTo(playPauseButton)
-        }
+           nextEpisodeButton.snp.makeConstraints { make in
+               make.leading.equalTo(playPauseButton.snp.trailing).offset(40)
+               make.centerY.equalTo(playPauseButton)
+           }
 
-        downloadButton.snp.makeConstraints { make in
-            make.top.equalTo(playPauseButton.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(200)
-            make.height.equalTo(50)
-        }
-    }
+           downloadButton.snp.makeConstraints { make in
+               make.top.equalTo(playPauseButton.snp.bottom).offset(30)
+               make.centerX.equalToSuperview()
+               make.width.equalTo(200)
+               make.height.equalTo(50)
+           }
+           
+           favoriteButton.snp.makeConstraints { make in
+               make.leading.equalTo(downloadButton.snp.trailing).offset(20)
+               make.centerY.equalTo(downloadButton)
+           }
+       }
 
     private func setupActions() {
         playPauseButton.addTarget(self, action: #selector(playPauseTapped), for: .touchUpInside)
         previousEpisodeButton.addTarget(self, action: #selector(previousEpisodeTapped), for: .touchUpInside)
         nextEpisodeButton.addTarget(self, action: #selector(nextEpisodeTapped), for: .touchUpInside)
         downloadButton.addTarget(self, action: #selector(downloadTapped), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
     }
     
     @objc private func playPauseTapped() {
@@ -149,6 +165,19 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     @objc private func downloadTapped() {
         presenter.downloadEpisode()
     }
+    
+    @objc private func favoriteTapped() {
+        FavoriteManager.shared.toggleFavorite(episode)
+        updateFavoriteState()
+    }
+
+
+    
+    private func updateFavoriteState() {
+            let isFavorite = FavoriteManager.shared.isFavorite(episode)
+            let imageName = isFavorite ? "heart.fill" : "heart"
+            favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        }
     
     func updateProgress(_ progress: Float) {
         DispatchQueue.main.async {

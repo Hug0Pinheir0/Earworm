@@ -20,6 +20,10 @@
 		478133F72D4BB4B1008C81E6 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 478133F62D4BB4B1008C81E6 /* FeedKit */; };
 		478133F92D4BBC48008C81E6 /* PlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478133F82D4BBC48008C81E6 /* PlayerPresenter.swift */; };
 		478133FB2D4BBD24008C81E6 /* PlayerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478133FA2D4BBD24008C81E6 /* PlayerViewProtocol.swift */; };
+		4781340E2D4C184F008C81E6 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4781340D2D4C184F008C81E6 /* FavoritesPresenter.swift */; };
+		478134122D4C18E6008C81E6 /* FavoriteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478134112D4C18E6008C81E6 /* FavoriteProtocol.swift */; };
+		478134142D4C1941008C81E6 /* FavoriteEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478134132D4C1941008C81E6 /* FavoriteEpisodeCell.swift */; };
+		478134162D4C1E61008C81E6 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478134152D4C1E61008C81E6 /* FavoritesManager.swift */; };
 		478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3072D43DC3000839239 /* AppDelegate.swift */; };
 		478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3092D43DC3000839239 /* SceneDelegate.swift */; };
 		478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */; };
@@ -36,7 +40,6 @@
 		478DD3352D44356D00839239 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3342D44356D00839239 /* CustomImageView.swift */; };
 		478DD3382D4438F200839239 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3372D4438F200839239 /* SnapKit */; };
 		478DD33A2D4438F200839239 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 478DD3392D4438F200839239 /* SnapKit-Dynamic */; };
-		47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */; };
 		47F209642D4A6202004B54EE /* EpisodePlaybackDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209632D4A6202004B54EE /* EpisodePlaybackDelegate.swift */; };
 		47F209692D4AA429004B54EE /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209682D4AA429004B54EE /* FavoritesViewController.swift */; };
 		47F2096B2D4AA43B004B54EE /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F2096A2D4AA43B004B54EE /* DownloadsViewController.swift */; };
@@ -61,6 +64,10 @@
 		4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSFeedViewProtocol.swift; path = Earworm/Modules/RSSFeed/Protocols/RSSFeedViewProtocol.swift; sourceTree = SOURCE_ROOT; };
 		478133F82D4BBC48008C81E6 /* PlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPresenter.swift; sourceTree = "<group>"; };
 		478133FA2D4BBD24008C81E6 /* PlayerViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewProtocol.swift; sourceTree = "<group>"; };
+		4781340D2D4C184F008C81E6 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
+		478134112D4C18E6008C81E6 /* FavoriteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocol.swift; sourceTree = "<group>"; };
+		478134132D4C1941008C81E6 /* FavoriteEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEpisodeCell.swift; sourceTree = "<group>"; };
+		478134152D4C1E61008C81E6 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		478DD3042D43DC3000839239 /* Earworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478DD3072D43DC3000839239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		478DD3092D43DC3000839239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +82,6 @@
 		478DD3302D44352D00839239 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		478DD3322D44354E00839239 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		478DD3342D44356D00839239 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
-		47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParserUtils.swift; sourceTree = "<group>"; };
 		47F209632D4A6202004B54EE /* EpisodePlaybackDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlaybackDelegate.swift; sourceTree = "<group>"; };
 		47F209682D4AA429004B54EE /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		47F2096A2D4AA43B004B54EE /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +131,56 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4781340C2D4C1494008C81E6 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				47F209682D4AA429004B54EE /* FavoritesViewController.swift */,
+				4781340D2D4C184F008C81E6 /* FavoritesPresenter.swift */,
+				478134112D4C18E6008C81E6 /* FavoriteProtocol.swift */,
+				478134132D4C1941008C81E6 /* FavoriteEpisodeCell.swift */,
+				478134152D4C1E61008C81E6 /* FavoritesManager.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		478134172D4C3952008C81E6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		478134182D4C3969008C81E6 /* BaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				47F209752D4AD394004B54EE /* BaseTableViewCell.swift */,
+				47F209772D4AD3A6004B54EE /* BaseTableViewController.swift */,
+			);
+			path = BaseClasses;
+			sourceTree = "<group>";
+		};
+		478134192D4C397D008C81E6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				47186F032D4981B900AA8CB7 /* URLValidator.swift */,
+				47F209732D4AAD7F004B54EE /* NavigationManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4781341A2D4C3A57008C81E6 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				478DD32E2D4434A900839239 /* CustomTextField.swift */,
+				478DD3302D44352D00839239 /* CustomButton.swift */,
+				478DD3322D44354E00839239 /* CustomLabel.swift */,
+				478DD3342D44356D00839239 /* CustomImageView.swift */,
+				47F2096C2D4AA5EE004B54EE /* CustomTabBarController.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
 		478DD2FB2D43DC3000839239 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +224,7 @@
 		478DD3272D44027B00839239 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4781340C2D4C1494008C81E6 /* Favorites */,
 				47F2096E2D4AA84D004B54EE /* Downloads */,
 				4774AC1E2D44401E00DE4DA3 /* Player */,
 				478DD3282D44028600839239 /* RSSFeed */,
@@ -245,7 +302,6 @@
 		47F209672D4AA412004B54EE /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				47F209682D4AA429004B54EE /* FavoritesViewController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -361,6 +417,7 @@
 				47F209762D4AD394004B54EE /* BaseTableViewCell.swift in Sources */,
 				47186F072D49CC9100AA8CB7 /* RSSCacheManager.swift in Sources */,
 				478DD3332D44354E00839239 /* CustomLabel.swift in Sources */,
+				478134162D4C1E61008C81E6 /* FavoritesManager.swift in Sources */,
 				478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */,
 				47F209692D4AA429004B54EE /* FavoritesViewController.swift in Sources */,
 				47F209722D4AA8E7004B54EE /* DownloadsManager.swift in Sources */,
@@ -368,6 +425,7 @@
 				47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */,
 				4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */,
 				478133FB2D4BBD24008C81E6 /* PlayerViewProtocol.swift in Sources */,
+				4781340E2D4C184F008C81E6 /* FavoritesPresenter.swift in Sources */,
 				47F209742D4AAD7F004B54EE /* NavigationManager.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
@@ -380,7 +438,9 @@
 				478DD3312D44352D00839239 /* CustomButton.swift in Sources */,
 				478DD31D2D43E41A00839239 /* NetworkService.swift in Sources */,
 				47186F042D4981B900AA8CB7 /* URLValidator.swift in Sources */,
+				478134122D4C18E6008C81E6 /* FavoriteProtocol.swift in Sources */,
 				478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */,
+				478134142D4C1941008C81E6 /* FavoriteEpisodeCell.swift in Sources */,
 				4774AC242D4441CA00DE4DA3 /* PodcastDetailsViewController.swift in Sources */,
 				47F2096B2D4AA43B004B54EE /* DownloadsViewController.swift in Sources */,
 				478DD31F2D43E42700839239 /* RSSParser.swift in Sources */,
