@@ -24,6 +24,7 @@
 		478134122D4C18E6008C81E6 /* FavoriteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478134112D4C18E6008C81E6 /* FavoriteProtocol.swift */; };
 		478134142D4C1941008C81E6 /* FavoriteEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478134132D4C1941008C81E6 /* FavoriteEpisodeCell.swift */; };
 		478134162D4C1E61008C81E6 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478134152D4C1E61008C81E6 /* FavoritesManager.swift */; };
+		4781341C2D4C3E68008C81E6 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4781341B2D4C3E68008C81E6 /* BaseTableViewCell.swift */; };
 		478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3072D43DC3000839239 /* AppDelegate.swift */; };
 		478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3092D43DC3000839239 /* SceneDelegate.swift */; };
 		478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */; };
@@ -47,7 +48,6 @@
 		47F209702D4AA8D9004B54EE /* DownloadEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F2096F2D4AA8D9004B54EE /* DownloadEpisodeCell.swift */; };
 		47F209722D4AA8E7004B54EE /* DownloadsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209712D4AA8E7004B54EE /* DownloadsManager.swift */; };
 		47F209742D4AAD7F004B54EE /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209732D4AAD7F004B54EE /* NavigationManager.swift */; };
-		47F209762D4AD394004B54EE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209752D4AD394004B54EE /* BaseTableViewCell.swift */; };
 		47F209782D4AD3A6004B54EE /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F209772D4AD3A6004B54EE /* BaseTableViewController.swift */; };
 		47F2097B2D4AD4F5004B54EE /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F2097A2D4AD4F5004B54EE /* EpisodeTableViewCell.swift */; };
 		47F2097F2D4ADD64004B54EE /* DownloadEpisodeCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F2097E2D4ADD64004B54EE /* DownloadEpisodeCellDelegate.swift */; };
@@ -68,6 +68,7 @@
 		478134112D4C18E6008C81E6 /* FavoriteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocol.swift; sourceTree = "<group>"; };
 		478134132D4C1941008C81E6 /* FavoriteEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEpisodeCell.swift; sourceTree = "<group>"; };
 		478134152D4C1E61008C81E6 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		4781341B2D4C3E68008C81E6 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		478DD3042D43DC3000839239 /* Earworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478DD3072D43DC3000839239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		478DD3092D43DC3000839239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		47F2096F2D4AA8D9004B54EE /* DownloadEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadEpisodeCell.swift; sourceTree = "<group>"; };
 		47F209712D4AA8E7004B54EE /* DownloadsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsManager.swift; sourceTree = "<group>"; };
 		47F209732D4AAD7F004B54EE /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
-		47F209752D4AD394004B54EE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		47F209772D4AD3A6004B54EE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		47F2097A2D4AD4F5004B54EE /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		47F2097E2D4ADD64004B54EE /* DownloadEpisodeCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadEpisodeCellDelegate.swift; sourceTree = "<group>"; };
@@ -141,44 +141,6 @@
 				478134152D4C1E61008C81E6 /* FavoritesManager.swift */,
 			);
 			path = Favorites;
-			sourceTree = "<group>";
-		};
-		478134172D4C3952008C81E6 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		478134182D4C3969008C81E6 /* BaseClasses */ = {
-			isa = PBXGroup;
-			children = (
-				47F209752D4AD394004B54EE /* BaseTableViewCell.swift */,
-				47F209772D4AD3A6004B54EE /* BaseTableViewController.swift */,
-			);
-			path = BaseClasses;
-			sourceTree = "<group>";
-		};
-		478134192D4C397D008C81E6 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				47186F032D4981B900AA8CB7 /* URLValidator.swift */,
-				47F209732D4AAD7F004B54EE /* NavigationManager.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		4781341A2D4C3A57008C81E6 /* UIComponents */ = {
-			isa = PBXGroup;
-			children = (
-				478DD32E2D4434A900839239 /* CustomTextField.swift */,
-				478DD3302D44352D00839239 /* CustomButton.swift */,
-				478DD3322D44354E00839239 /* CustomLabel.swift */,
-				478DD3342D44356D00839239 /* CustomImageView.swift */,
-				47F2096C2D4AA5EE004B54EE /* CustomTabBarController.swift */,
-			);
-			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		478DD2FB2D43DC3000839239 = {
@@ -280,12 +242,11 @@
 				478DD3322D44354E00839239 /* CustomLabel.swift */,
 				478DD3342D44356D00839239 /* CustomImageView.swift */,
 				4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */,
-				47AEB0572D4848C20080EBFE /* RSSParserUtils.swift */,
 				47186F032D4981B900AA8CB7 /* URLValidator.swift */,
 				47F2096C2D4AA5EE004B54EE /* CustomTabBarController.swift */,
 				47F209732D4AAD7F004B54EE /* NavigationManager.swift */,
-				47F209752D4AD394004B54EE /* BaseTableViewCell.swift */,
 				47F209772D4AD3A6004B54EE /* BaseTableViewController.swift */,
+				4781341B2D4C3E68008C81E6 /* BaseTableViewCell.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -414,7 +375,6 @@
 				478DD32F2D4434A900839239 /* CustomTextField.swift in Sources */,
 				47F2096D2D4AA5EE004B54EE /* CustomTabBarController.swift in Sources */,
 				4774AC302D446EBD00DE4DA3 /* RSSFeedPresenter.swift in Sources */,
-				47F209762D4AD394004B54EE /* BaseTableViewCell.swift in Sources */,
 				47186F072D49CC9100AA8CB7 /* RSSCacheManager.swift in Sources */,
 				478DD3332D44354E00839239 /* CustomLabel.swift in Sources */,
 				478134162D4C1E61008C81E6 /* FavoritesManager.swift in Sources */,
@@ -422,7 +382,6 @@
 				47F209692D4AA429004B54EE /* FavoritesViewController.swift in Sources */,
 				47F209722D4AA8E7004B54EE /* DownloadsManager.swift in Sources */,
 				47F209782D4AD3A6004B54EE /* BaseTableViewController.swift in Sources */,
-				47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */,
 				4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */,
 				478133FB2D4BBD24008C81E6 /* PlayerViewProtocol.swift in Sources */,
 				4781340E2D4C184F008C81E6 /* FavoritesPresenter.swift in Sources */,
@@ -430,6 +389,7 @@
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
 				478133F92D4BBC48008C81E6 /* PlayerPresenter.swift in Sources */,
+				4781341C2D4C3E68008C81E6 /* BaseTableViewCell.swift in Sources */,
 				47F2097F2D4ADD64004B54EE /* DownloadEpisodeCellDelegate.swift in Sources */,
 				4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */,
 				47F2097B2D4AD4F5004B54EE /* EpisodeTableViewCell.swift in Sources */,
