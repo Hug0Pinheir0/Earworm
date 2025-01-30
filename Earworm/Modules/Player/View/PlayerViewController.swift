@@ -9,12 +9,24 @@ import UIKit
 import SnapKit
 
 class PlayerViewController: UIViewController, PlayerViewProtocol {
+ 
+    
 
     // MARK: - Properties
     private var presenter: PlayerPresenter
+    private var episode: Episode
 
     // MARK: - UI Elements
-    private let episodeTitleLabel = UILabel()
+    private let episodeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .black
+        label.numberOfLines = 0 // ✅ Permite múltiplas linhas
+        label.lineBreakMode = .byWordWrapping // ✅ Quebra palavras corretamente
+        label.textAlignment = .center // ✅ Centraliza o texto
+        return label
+    }()
+
     
     private let progressBar: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
@@ -42,10 +54,11 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     
     // MARK: - Initializer
     init(episode: Episode, episodeList: [Episode], startIndex: Int) {
-        self.presenter = PlayerPresenter(view: nil, episode: episode, episodeList: episodeList, startIndex: startIndex)
-        super.init(nibName: nil, bundle: nil)
-        self.presenter = PlayerPresenter(view: self, episode: episode, episodeList: episodeList, startIndex: startIndex)
-    }
+         self.episode = episode
+         self.presenter = PlayerPresenter(view: nil, episode: episode, episodeList: episodeList, startIndex: startIndex)
+         super.init(nibName: nil, bundle: nil)
+         self.presenter = PlayerPresenter(view: self, episode: episode, episodeList: episodeList, startIndex: startIndex)
+     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -58,6 +71,7 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
         setupConstraints()
         setupActions()
         presenter.checkDownloadStatus()
+        presenter.startPlayback()
     }
 
     // MARK: - Setup UI
@@ -135,6 +149,24 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     @objc private func downloadTapped() {
         presenter.downloadEpisode()
     }
+    
+    func updateProgress(_ progress: Float) {
+        DispatchQueue.main.async {
+            self.progressBar.setProgress(progress, animated: true)
+        }
+    }
+
+    func updatePlayPauseButton(isPlaying: Bool) {
+        let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
+        playPauseButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    func updateUI(with episode: Episode) {
+        self.episode = episode
+        episodeTitleLabel.text = episode.title
+        updatePlayPauseButton(isPlaying: AudioPlayerManager.shared.isPlaying())
+    }
+
 
     func updateDownloadButton(isDownloaded: Bool) {
         if isDownloaded {

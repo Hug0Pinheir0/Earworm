@@ -19,6 +19,7 @@ class PlayerPresenter {
         self.episode = episode
         self.episodeList = episodeList
         self.currentIndex = startIndex
+        observePlaybackProgress()
     }
 
     func checkDownloadStatus() {
@@ -32,19 +33,52 @@ class PlayerPresenter {
             return
         }
         
-        DownloadsManager.shared.saveDownloadedEpisode(episode)
-        view?.showDownloadCompletion()
+        DownloadsManager.shared.downloadEpisode(episode) { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.view?.showDownloadCompletion()
+                } else {
+                    self.view?.showDownloadError("Erro ao baixar o episódio.")
+                }
+            }
+        }
+    }
+    
+    func startPlayback() {
+        AudioPlayerManager.shared.play(url: episode.audioURL)
+        view?.updateUI(with: episode)
+    }
+
+    func observePlaybackProgress() {
+        AudioPlayerManager.shared.onProgressUpdate = { [weak self] progress in
+            self?.view?.updateProgress(progress) 
+        }
     }
 
     func togglePlayPause() {
-        print("🎵 Toggle Play/Pause - Adicionar lógica do player aqui")
+        if AudioPlayerManager.shared.isPlaying() {
+            AudioPlayerManager.shared.pause()
+        } else {
+            AudioPlayerManager.shared.play(url: episode.audioURL)
+        }
+        view?.updatePlayPauseButton(isPlaying: AudioPlayerManager.shared.isPlaying())
     }
 
     func previousEpisode() {
-        print("⏮ Retornar ao episódio anterior")
+        guard currentIndex > 0 else { return }
+        AudioPlayerManager.shared.stop()
+        currentIndex -= 1
+        episode = episodeList[currentIndex]
+        AudioPlayerManager.shared.play(url: episode.audioURL)
+        view?.updateUI(with: episode)
     }
 
     func nextEpisode() {
-        print("⏭ Avançar para o próximo episódio")
+        guard currentIndex < episodeList.count - 1 else { return }
+        AudioPlayerManager.shared.stop()
+        currentIndex += 1
+        episode = episodeList[currentIndex]
+        AudioPlayerManager.shared.play(url: episode.audioURL)
+        view?.updateUI(with: episode)
     }
 }
