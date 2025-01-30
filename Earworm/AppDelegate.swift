@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            cache.config.maxDiskAge = 60 * 60 * 24 * 7
 
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        try? AVAudioSession.sharedInstance().setActive(true)
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+        
     }
 
     // MARK: UISceneSession Lifecycle

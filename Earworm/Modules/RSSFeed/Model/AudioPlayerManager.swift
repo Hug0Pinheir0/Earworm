@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import MediaPlayer
 
 class AudioPlayerManager {
     
@@ -21,7 +22,18 @@ class AudioPlayerManager {
     var onProgressUpdate: ((Float) -> Void)?
     var onEpisodeChange: ((Episode) -> Void)?
 
-    private init() {}
+    private init() {
+        configureAudioSession()
+    }
+    
+    private func configureAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Erro ao configurar o AVAudioSession: \(error.localizedDescription)")
+        }
+    }
 
     func play(url: URL) {
         player = AVPlayer(url: url)
@@ -38,6 +50,10 @@ class AudioPlayerManager {
             player.play()
         }
         isCurrentlyPlaying.toggle()
+    }
+    
+    func getPlayer() -> AVPlayer? {
+        return player
     }
     
     func pause() {
@@ -96,4 +112,3 @@ class AudioPlayerManager {
         }
     }
 }
-

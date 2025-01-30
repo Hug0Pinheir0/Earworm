@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import AVFoundation
+import MediaPlayer
+
 
 class PlayerPresenter {
     
@@ -20,6 +23,7 @@ class PlayerPresenter {
         self.episodeList = episodeList
         self.currentIndex = startIndex
         observePlaybackProgress()
+        setupBackgroundPlayback()
     }
 
     func checkDownloadStatus() {
@@ -49,12 +53,6 @@ class PlayerPresenter {
         view?.updateUI(with: episode)
     }
 
-    func observePlaybackProgress() {
-        AudioPlayerManager.shared.onProgressUpdate = { [weak self] progress in
-            self?.view?.updateProgress(progress) 
-        }
-    }
-
     func togglePlayPause() {
         if AudioPlayerManager.shared.isPlaying() {
             AudioPlayerManager.shared.pause()
@@ -80,5 +78,20 @@ class PlayerPresenter {
         episode = episodeList[currentIndex]
         AudioPlayerManager.shared.play(url: episode.audioURL)
         view?.updateUI(with: episode)
+    }
+
+    func observePlaybackProgress() {
+        AudioPlayerManager.shared.onProgressUpdate = { [weak self] progress in
+            self?.view?.updateProgress(progress)
+        }
+    }
+
+    private func setupBackgroundPlayback() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Erro ao configurar reprodução em background: \(error.localizedDescription)")
+        }
     }
 }
