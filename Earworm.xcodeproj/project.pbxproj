@@ -18,6 +18,8 @@
 		4774AC302D446EBD00DE4DA3 /* RSSFeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC2F2D446EBD00DE4DA3 /* RSSFeedPresenter.swift */; };
 		4774AC322D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */; };
 		478133F72D4BB4B1008C81E6 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 478133F62D4BB4B1008C81E6 /* FeedKit */; };
+		478133F92D4BBC48008C81E6 /* PlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478133F82D4BBC48008C81E6 /* PlayerPresenter.swift */; };
+		478133FB2D4BBD24008C81E6 /* PlayerViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478133FA2D4BBD24008C81E6 /* PlayerViewProtocol.swift */; };
 		478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3072D43DC3000839239 /* AppDelegate.swift */; };
 		478DD30A2D43DC3000839239 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD3092D43DC3000839239 /* SceneDelegate.swift */; };
 		478DD30C2D43DC3000839239 /* RSSFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478DD30B2D43DC3000839239 /* RSSFeedViewController.swift */; };
@@ -57,6 +59,8 @@
 		4774AC292D44653A00DE4DA3 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		4774AC2F2D446EBD00DE4DA3 /* RSSFeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSFeedPresenter.swift; path = Earworm/Modules/RSSFeed/Presenter/RSSFeedPresenter.swift; sourceTree = SOURCE_ROOT; };
 		4774AC312D446EDD00DE4DA3 /* RSSFeedViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSFeedViewProtocol.swift; path = Earworm/Modules/RSSFeed/Protocols/RSSFeedViewProtocol.swift; sourceTree = SOURCE_ROOT; };
+		478133F82D4BBC48008C81E6 /* PlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPresenter.swift; sourceTree = "<group>"; };
+		478133FA2D4BBD24008C81E6 /* PlayerViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewProtocol.swift; sourceTree = "<group>"; };
 		478DD3042D43DC3000839239 /* Earworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		478DD3072D43DC3000839239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		478DD3092D43DC3000839239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				4774AC272D44507B00DE4DA3 /* PlayerViewController.swift */,
+				478133F82D4BBC48008C81E6 /* PlayerPresenter.swift */,
+				478133FA2D4BBD24008C81E6 /* PlayerViewProtocol.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -361,9 +367,11 @@
 				47F209782D4AD3A6004B54EE /* BaseTableViewController.swift in Sources */,
 				47AEB0582D4848C20080EBFE /* RSSParserUtils.swift in Sources */,
 				4774AC2A2D44653A00DE4DA3 /* UIViewController+Alert.swift in Sources */,
+				478133FB2D4BBD24008C81E6 /* PlayerViewProtocol.swift in Sources */,
 				47F209742D4AAD7F004B54EE /* NavigationManager.swift in Sources */,
 				478DD3082D43DC3000839239 /* AppDelegate.swift in Sources */,
 				478DD3262D43EAFD00839239 /* RssFeed.swift in Sources */,
+				478133F92D4BBC48008C81E6 /* PlayerPresenter.swift in Sources */,
 				47F2097F2D4ADD64004B54EE /* DownloadEpisodeCellDelegate.swift in Sources */,
 				4774AC282D44507B00DE4DA3 /* PlayerViewController.swift in Sources */,
 				47F2097B2D4AD4F5004B54EE /* EpisodeTableViewCell.swift in Sources */,

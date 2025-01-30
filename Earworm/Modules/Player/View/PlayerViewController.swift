@@ -8,22 +8,13 @@
 import UIKit
 import SnapKit
 
-class PlayerViewController: UIViewController {
-    
+class PlayerViewController: UIViewController, PlayerViewProtocol {
+
     // MARK: - Properties
-    private var episode: Episode
-    private var episodeList: [Episode]
-    private var currentIndex: Int
+    private var presenter: PlayerPresenter
 
     // MARK: - UI Elements
-    private let episodeTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        return label
-    }()
+    private let episodeTitleLabel = UILabel()
     
     private let progressBar: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
@@ -33,33 +24,27 @@ class PlayerViewController: UIViewController {
         return progressView
     }()
     
-    private let playPauseButton: UIButton = {
+    private let playPauseButton = UIButton(type: .system)
+    private let previousEpisodeButton = UIButton(type: .system)
+    private let nextEpisodeButton = UIButton(type: .system)
+    
+    private let downloadButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
-        button.tintColor = .systemBlue
+        button.setTitle("Baixar EP", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.backgroundColor = .systemBlue
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        button.setImage(UIImage(systemName: "arrow.down.circle"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         return button
     }()
     
-    private let previousEpisodeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "backward.fill"), for: .normal)
-        button.tintColor = .gray
-        return button
-    }()
-    
-    private let nextEpisodeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "forward.fill"), for: .normal)
-        button.tintColor = .gray
-        return button
-    }()
-
     // MARK: - Initializer
     init(episode: Episode, episodeList: [Episode], startIndex: Int) {
-        self.episode = episode
-        self.episodeList = episodeList
-        self.currentIndex = startIndex
+        self.presenter = PlayerPresenter(view: nil, episode: episode, episodeList: episodeList, startIndex: startIndex)
         super.init(nibName: nil, bundle: nil)
+        self.presenter = PlayerPresenter(view: self, episode: episode, episodeList: episodeList, startIndex: startIndex)
     }
     
     required init?(coder: NSCoder) {
@@ -72,113 +57,107 @@ class PlayerViewController: UIViewController {
         setupUI()
         setupConstraints()
         setupActions()
-        configureAudioPlayer()
-        updateUI()
+        presenter.checkDownloadStatus()
     }
 
-    private func configureAudioPlayer() {
-        AudioPlayerManager.shared.onProgressUpdate = { [weak self] progress in
-            self?.progressBar.setProgress(progress, animated: true)
-        }
-
-        AudioPlayerManager.shared.onEpisodeChange = { [weak self] episode in
-            self?.updateUI(with: episode)
-        }
-
-        // Iniciar a reprodução do episódio ao abrir a tela
-        AudioPlayerManager.shared.play(url: episode.audioURL)
-    }
-
-    private func updateUI() {
-        episodeTitleLabel.text = episode.title
-        updatePlayPauseButton()
-    }
-
-    private func updateUI(with episode: Episode) {
-        self.episode = episode
-        episodeTitleLabel.text = episode.title
-        updatePlayPauseButton()
-    }
-
-    // MARK: - Actions
-    
-    private func setupActions() {
-        playPauseButton.addTarget(self, action: #selector(playPauseTapped), for: .touchUpInside)
-        previousEpisodeButton.addTarget(self, action: #selector(previousEpisodeTapped), for: .touchUpInside)
-        nextEpisodeButton.addTarget(self, action: #selector(nextEpisodeTapped), for: .touchUpInside)
-    }
-
-    @objc private func playPauseTapped() {
-        if AudioPlayerManager.shared.isPlaying() {
-            AudioPlayerManager.shared.pause()
-        } else {
-            AudioPlayerManager.shared.play(url: episode.audioURL)
-        }
-        updatePlayPauseButton()
-    }
-
-    @objc private func nextEpisodeTapped() {
-        guard currentIndex < episodeList.count - 1 else { return }
-        AudioPlayerManager.shared.stop()
-        currentIndex += 1
-        let nextEpisode = episodeList[currentIndex]
-        AudioPlayerManager.shared.play(url: nextEpisode.audioURL)
-        updateUI(with: nextEpisode)
-    }
-
-    @objc private func previousEpisodeTapped() {
-        guard currentIndex > 0 else { return }
-        AudioPlayerManager.shared.stop()
-        currentIndex -= 1
-        let previousEpisode = episodeList[currentIndex]
-        AudioPlayerManager.shared.play(url: previousEpisode.audioURL)
-        updateUI(with: previousEpisode)
-    }
-
-    private func updatePlayPauseButton() {
-        let isPlaying = AudioPlayerManager.shared.isPlaying()
-        let imageName = isPlaying ? "pause.circle.fill" : "play.circle.fill"
-        playPauseButton.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-    
-    // MARK: - UI Setup
+    // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = .white
+
+        playPauseButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        playPauseButton.tintColor = .systemBlue
+        
+        previousEpisodeButton.setImage(UIImage(systemName: "backward.fill"), for: .normal)
+        nextEpisodeButton.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+
         view.addSubview(episodeTitleLabel)
         view.addSubview(progressBar)
         view.addSubview(playPauseButton)
         view.addSubview(previousEpisodeButton)
         view.addSubview(nextEpisodeButton)
+        view.addSubview(downloadButton)
     }
-    
+
     private func setupConstraints() {
         episodeTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
         }
-        
+
         progressBar.snp.makeConstraints { make in
             make.top.equalTo(episodeTitleLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
         }
-        
+
         playPauseButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(progressBar.snp.bottom).offset(40)
             make.width.height.equalTo(60)
         }
-        
+
         previousEpisodeButton.snp.makeConstraints { make in
             make.trailing.equalTo(playPauseButton.snp.leading).offset(-40)
             make.centerY.equalTo(playPauseButton)
-            make.width.height.equalTo(50)
         }
-        
+
         nextEpisodeButton.snp.makeConstraints { make in
             make.leading.equalTo(playPauseButton.snp.trailing).offset(40)
             make.centerY.equalTo(playPauseButton)
-            make.width.height.equalTo(50)
+        }
+
+        downloadButton.snp.makeConstraints { make in
+            make.top.equalTo(playPauseButton.snp.bottom).offset(30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(200)
+            make.height.equalTo(50)
         }
     }
-}
 
+    private func setupActions() {
+        playPauseButton.addTarget(self, action: #selector(playPauseTapped), for: .touchUpInside)
+        previousEpisodeButton.addTarget(self, action: #selector(previousEpisodeTapped), for: .touchUpInside)
+        nextEpisodeButton.addTarget(self, action: #selector(nextEpisodeTapped), for: .touchUpInside)
+        downloadButton.addTarget(self, action: #selector(downloadTapped), for: .touchUpInside)
+    }
+    
+    @objc private func playPauseTapped() {
+        presenter.togglePlayPause()
+    }
+
+    @objc private func previousEpisodeTapped() {
+        presenter.previousEpisode()
+    }
+
+    @objc private func nextEpisodeTapped() {
+        presenter.nextEpisode()
+    }
+
+    @objc private func downloadTapped() {
+        presenter.downloadEpisode()
+    }
+
+    func updateDownloadButton(isDownloaded: Bool) {
+        if isDownloaded {
+            downloadButton.setTitle("Baixado", for: .normal)
+            downloadButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            downloadButton.backgroundColor = .gray
+        } else {
+            downloadButton.setTitle("Baixar EP", for: .normal)
+            downloadButton.setImage(UIImage(systemName: "arrow.down.circle"), for: .normal)
+            downloadButton.backgroundColor = .systemBlue
+        }
+    }
+
+    func showDownloadCompletion() {
+        updateDownloadButton(isDownloaded: true)
+        let alert = UIAlertController(title: "Download Completo", message: "Episódio adicionado aos downloads!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    func showDownloadError(_ message: String) {
+        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+}
