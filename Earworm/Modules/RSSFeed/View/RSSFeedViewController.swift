@@ -13,6 +13,8 @@ class RSSFeedViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    private let cardView = CustomCardView()
+
     private let titleLabel: CustomLabel = {
         let label = CustomLabel(
             text: "Insira aqui a URL do RSS",
@@ -27,11 +29,10 @@ class RSSFeedViewController: UIViewController {
         let textField = CustomTextField(
             placeholder: "Digite a URL do RSS"
         )
-        textField.text = "https://anchor.fm/s/7a186bc/podcast/rss" // Define a URL fixa
+        textField.text = "https://anchor.fm/s/7a186bc/podcast/rss"
         return textField
     }()
 
-    
     private let submitButton: CustomButton = {
         let button = CustomButton(
             title: "Buscar",
@@ -57,9 +58,17 @@ class RSSFeedViewController: UIViewController {
         }
     )
 
-    // MARK: - Properties
-    var presenter: RSSFeedPresenter? // Presenter configurável após a criação
+    private let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
     
+    // MARK: - Properties
+    var presenter: RSSFeedPresenter?
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,35 +81,40 @@ class RSSFeedViewController: UIViewController {
     // MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(titleLabel)
-        view.addSubview(urlTextField)
-        view.addSubview(submitButton)
-        view.addSubview(clearCacheButton)
+        view.addSubview(cardView)
+
+        cardView.addSubview(titleLabel)
+        cardView.addSubview(urlTextField)
+        cardView.addSubview(buttonStackView)
+
+        buttonStackView.addArrangedSubview(submitButton)
+        buttonStackView.addArrangedSubview(clearCacheButton)
     }
     
     private func setupConstraints() {
+        cardView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.85)
+            make.height.greaterThanOrEqualTo(180)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(cardView.snp.top).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
         }
         
         urlTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
-        
-        submitButton.snp.makeConstraints { make in
-            make.top.equalTo(urlTextField.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(100)
-            make.height.equalTo(44)
-        }
 
-        clearCacheButton.snp.makeConstraints { make in
-            make.top.equalTo(submitButton.snp.bottom).offset(16) 
-            make.centerX.equalToSuperview()
-            make.width.equalTo(150)
+        buttonStackView.snp.makeConstraints { make in
+            make.top.equalTo(urlTextField.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(20)
             make.height.equalTo(44)
         }
     }
@@ -112,7 +126,6 @@ class RSSFeedViewController: UIViewController {
 }
 
 // MARK: - RSSFeedViewProtocol
-
 extension RSSFeedViewController: RSSFeedViewProtocol {
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Atenção", message: message, preferredStyle: .alert)
@@ -122,12 +135,12 @@ extension RSSFeedViewController: RSSFeedViewProtocol {
     
     func updateUI(with feed: RSSFeed) {
         DispatchQueue.main.async {
-            self.presenter?.navigateToDetails(with: feed) 
+            self.presenter?.navigateToDetails(with: feed)
         }
     }
 }
 
 #Preview {
-  let vc = RSSFeedViewController()
+    let vc = RSSFeedViewController()
     return vc
 }
