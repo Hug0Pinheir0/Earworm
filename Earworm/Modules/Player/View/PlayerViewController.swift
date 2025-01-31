@@ -17,18 +17,21 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     private var episode: Episode
 
     // MARK: - UI Elements
-    private let episodeTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
-        label.numberOfLines = 0 // ✅ Permite múltiplas linhas
-        label.lineBreakMode = .byWordWrapping // ✅ Quebra palavras corretamente
-        label.textAlignment = .center // ✅ Centraliza o texto
+    
+    private let cardView: CustomCardView = {
+        let view = CustomCardView()
+        return view
+    }()
+    
+    private let episodeTitleLabel: CustomLabel = {
+        let label = CustomLabel(text: "", fontSize: 18, textColor: .black, alignment: .center)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
-    private lazy var favoriteButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var favoriteButton: CustomButton = {
+        let button = CustomButton(title: "", backgroundColor: .clear)
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.tintColor = .red
         button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
@@ -48,18 +51,17 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     private let previousEpisodeButton = UIButton(type: .system)
     private let nextEpisodeButton = UIButton(type: .system)
     
-    private let downloadButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Baixar EP", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.backgroundColor = .systemBlue
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.setImage(UIImage(systemName: "arrow.down.circle"), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
-        return button
-    }()
-    
+    private let downloadButton = CustomButton(
+        title: "Baixar EP",
+        backgroundColor: .systemBlue,
+        cornerRadius: 10, textColor: .white,
+        image: UIImage(systemName: "arrow.down.circle"),
+        action: {
+            print("Download button tapped!")
+        }
+    )
+
+
     // MARK: - Initializer
     init(episode: Episode, episodeList: [Episode], startIndex: Int) {
          self.episode = episode
@@ -105,7 +107,7 @@ class PlayerViewController: UIViewController, PlayerViewProtocol {
     private func setupConstraints() {
            episodeTitleLabel.snp.makeConstraints { make in
                make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-               make.centerX.equalToSuperview()
+               make.leading.trailing.equalToSuperview().inset(16)
            }
 
            progressBar.snp.makeConstraints { make in
