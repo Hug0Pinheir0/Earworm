@@ -17,7 +17,7 @@ class DownloadEpisodeCell: BaseTableViewCell {
             text: "",
             fontSize: 16,
             textColor: .black,
-            alignment: .left
+            alignment: .center
         )
         return label
     }()

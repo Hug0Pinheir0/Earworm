@@ -12,7 +12,10 @@ class FavoriteEpisodeCell: BaseTableViewCell {
     private var episode: Episode?
     
     private let titleLabel: CustomLabel = {
-        return CustomLabel(text: "", fontSize: 18, textColor: .black, alignment: .left)
+        let label = CustomLabel(text: "", fontSize: 16, textColor: .black, alignment: .center)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        return label
     }()
     
     private lazy var favoriteButton: UIButton = {
@@ -36,9 +39,13 @@ class FavoriteEpisodeCell: BaseTableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(favoriteButton)
         
+        favoriteButton.setContentHuggingPriority(.required, for: .horizontal)
+        favoriteButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
+            make.trailing.equalTo(favoriteButton.snp.leading).offset(-8)
+            make.top.bottom.equalToSuperview().inset(10) 
         }
         
         favoriteButton.snp.makeConstraints { make in
