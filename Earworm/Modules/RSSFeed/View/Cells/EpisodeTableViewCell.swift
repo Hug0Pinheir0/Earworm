@@ -26,11 +26,19 @@ class EpisodeTableViewCell: BaseTableViewCell {
         return button
     }()
 
-    private let stackView: UIStackView = {
+    private let bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .center
+        return stackView
+    }()
+
+    private let verticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        stackView.alignment = .trailing
         return stackView
     }()
 
@@ -47,12 +55,15 @@ class EpisodeTableViewCell: BaseTableViewCell {
         playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         playButton.tintColor = .systemBlue
         
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(durationLabel)
-        stackView.addArrangedSubview(playButton)
+        bottomStackView.addArrangedSubview(durationLabel)
+        bottomStackView.addArrangedSubview(playButton)
 
-        stackView.snp.makeConstraints { make in
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(bottomStackView)
+
+        contentView.addSubview(verticalStackView)
+
+        verticalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
         }
     }
@@ -65,7 +76,7 @@ class EpisodeTableViewCell: BaseTableViewCell {
         guard let episode = item as? Episode else { return }
         self.episode = episode
         titleLabel.text = episode.title
-        durationLabel.text = "Duração: \(episode.duration)"
+        durationLabel.text = "Duração: \(episode.duration.toTimeString())"
     }
 
     @objc private func playButtonTapped() {
@@ -77,4 +88,3 @@ class EpisodeTableViewCell: BaseTableViewCell {
         isPlaying.toggle()
     }
 }
-
