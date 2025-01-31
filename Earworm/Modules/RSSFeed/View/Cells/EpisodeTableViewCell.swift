@@ -38,7 +38,7 @@ class EpisodeTableViewCell: BaseTableViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 4
-        stackView.alignment = .trailing
+        stackView.alignment = .leading
         return stackView
     }()
 
