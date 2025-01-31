@@ -29,7 +29,6 @@ class RSSFeedViewController: UIViewController {
         let textField = CustomTextField(
             placeholder: "Digite a URL do RSS"
         )
-        textField.text = "https://anchor.fm/s/7a186bc/podcast/rss"
         return textField
     }()
 
